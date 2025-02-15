@@ -3,7 +3,6 @@ package com.rayitosdesol.solarapp.controller;
 import com.rayitosdesol.solarapp.model.dto.ContractorDto;
 import com.rayitosdesol.solarapp.model.entity.Contractor;
 import com.rayitosdesol.solarapp.service.IContractorService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,6 @@ public class ContractorController {
 
     private final IContractorService contractorService;
 
-    @Autowired
     public ContractorController(IContractorService contractorService) {
         this.contractorService = contractorService;
     }
