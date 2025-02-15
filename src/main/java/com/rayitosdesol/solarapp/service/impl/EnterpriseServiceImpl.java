@@ -14,8 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class EnterpriseServiceImpl implements IEnterpriseService {
     
-    @Autowired
-    private EnterpriseDao enterpriseDao;
+    private final EnterpriseDao enterpriseDao;
+
+    public EnterpriseServiceImpl(EnterpriseDao enterpriseDao) {
+        this.enterpriseDao = enterpriseDao;
+    }
 
     @Override
     public Enterprise save(EnterpriseDto enterpriseDto) {
