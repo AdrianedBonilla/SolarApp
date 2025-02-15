@@ -15,9 +15,9 @@ public interface IContractorService {
 
     Contractor findById(Long idContractor);
 
-    Contractor save(ContractorDto contractor);
+    Contractor save(ContractorDto contractorDto);
     
-    void delete(Contractor contractor);
+    void delete(ContractorDto contractorDto);
 
     void deleteById(Long idContractor);
 

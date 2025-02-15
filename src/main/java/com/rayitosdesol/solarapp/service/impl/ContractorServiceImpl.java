@@ -96,8 +96,10 @@ public class ContractorServiceImpl implements IContractorService{
 
     @Transactional
     @Override
-    public void delete(Contractor contractor) {
-        contractorDao.delete(contractor );
+    public void delete(ContractorDto contractorDto) {
+        Contractor contractor = contractorDao.findById(contractorDto.getIdContractor())
+            .orElseThrow(() -> new RuntimeException("El contratista con ID " + contractorDto.getIdContractor() + " no existe"));
+        contractorDao.delete(contractor);
     }
 
     @Transactional
