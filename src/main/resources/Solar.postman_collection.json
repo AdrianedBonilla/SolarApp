@@ -1,0 +1,1183 @@
+{
+	"info": {
+		"_postman_id": "c6f0e30c-3d5c-477a-8782-fdec226ec839",
+		"name": "Solar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18326062",
+		"_collection_link": "https://interstellar-resonance-268400.postman.co/workspace/1cf53c13-eec6-48b9-a1f5-17f84423a5f3/collection/18326062-c6f0e30c-3d5c-477a-8782-fdec226ec839?action=share&source=collection_link&creator=18326062"
+	},
+	"item": [
+		{
+			"name": "Contratistas",
+			"item": [
+				{
+					"name": "Registrar un contratista",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameContractor\": \"Juan Pérez\",\r\n    \"emailContractor\": \"juan.perez@example.com\",\r\n    \"passwordContractor\": \"securepassword\",\r\n    \"phoneContractor\": \"+573001234567\",\r\n    \"locationContractor\": \"Medellín, Colombia\",\r\n    \"expertiseContractor\": \"Instalación de paneles solares\",\r\n    \"nitEnterprise\": \"123456789\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar un contratista",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameContractor\": \"Jose Pérez\",\r\n    \"emailContractor\": \"jose.perez@example.com\",\r\n    \"passwordContractor\": \"securepassword\",\r\n    \"phoneContractor\": \"+573001234567\",\r\n    \"locationContractor\": \"Medellín, Colombia\",\r\n    \"expertiseContractor\": \"Instalación de paneles solares\",\r\n    \"nitEnterprise\": \"123456789\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar contratistas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar contratista por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un contratista",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login contratista",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailContractor\": \"jose.perez@example.com\",\r\n    \"passwordContractor\": \"securepassword\",\r\n    \"nitEnterprise\": \"123456789\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/contractors/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"contractors",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Registrar solicitud de contacto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Juan\",\r\n  \"lastName\": \"Pérez\",\r\n  \"phoneNumber\": \"3001234567\",\r\n  \"city\": \"Bogotá\",\r\n  \"neighborhood\": \"Chapinero\",\r\n  \"monthlyEnergyConsumption\": 500.75,\r\n  \"contractor\": {\r\n    \"id\": 3\r\n  }\r\n}\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user-contact-requests/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user-contact-requests",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enviar email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ya29.a0AXeO80RW7QrvGB14gcNW6lJKXzgD0wJRWD6l7B7--DB-ZbAuoRG9wzGAZ7ZmjIEARFlCuf81HRTScpQKvCANnPm4Hk8ZLlD4GIPIGwIr2tqGZGKWO2iDV8mRIIGHqRFdoV6zNnSSduKCbH_NJEiUZcOuozT5omgUBhHA8CXCaCgYKAW8SARESFQHGX2MiSdkiHNaS805JEK2u4ES8zg0175",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"recipientEmail\": \"windfall-978@hotmail.com\",\r\n  \"subject\": \"Prueba de notificación automática\",\r\n  \"body\": \"Este es un mensaje de prueba desde la aplicación de energía solar.\"\r\n}\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/emails/send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emails",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar solicitudes registadas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "usuario",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Felipe\",\r\n  \"lastName\": \"Suarez\",\r\n  \"phoneNumber\": \"3203155789\",\r\n  \"city\": \"Bogotá\",\r\n  \"neighborhood\": \"Chapinero\",\r\n  \"monthlyEnergyConsumption\": 300,\r\n  \"contractor\": {\r\n    \"id\": 3\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user-contact-requests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user-contact-requests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios Copy",
+			"item": [
+				{
+					"name": "Registrar solicitud de contacto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Juan\",\r\n  \"lastName\": \"Pérez\",\r\n  \"phoneNumber\": \"3001234567\",\r\n  \"city\": \"Bogotá\",\r\n  \"neighborhood\": \"Chapinero\",\r\n  \"monthlyEnergyConsumption\": 500.75,\r\n  \"contractor\": {\r\n    \"id\": 3\r\n  }\r\n}\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user-contact-requests/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user-contact-requests",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enviar email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ya29.a0AXeO80RW7QrvGB14gcNW6lJKXzgD0wJRWD6l7B7--DB-ZbAuoRG9wzGAZ7ZmjIEARFlCuf81HRTScpQKvCANnPm4Hk8ZLlD4GIPIGwIr2tqGZGKWO2iDV8mRIIGHqRFdoV6zNnSSduKCbH_NJEiUZcOuozT5omgUBhHA8CXCaCgYKAW8SARESFQHGX2MiSdkiHNaS805JEK2u4ES8zg0175",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"recipientEmail\": \"windfall-978@hotmail.com\",\r\n  \"subject\": \"Prueba de notificación automática\",\r\n  \"body\": \"Este es un mensaje de prueba desde la aplicación de energía solar.\"\r\n}\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/emails/send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"emails",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Codigo autorizacion API",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "usuario",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://accounts.google.com/o/oauth2/auth?client_id=243156105422-clhm8gsqeke6liladue76d15ukqdi4e8.apps.googleusercontent.com&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/gmail.send&response_type=code&access_type=offline",
+							"protocol": "https",
+							"host": [
+								"accounts",
+								"google",
+								"com"
+							],
+							"path": [
+								"o",
+								"oauth2",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "243156105422-clhm8gsqeke6liladue76d15ukqdi4e8.apps.googleusercontent.com"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "urn:ietf:wg:oauth:2.0:oob"
+								},
+								{
+									"key": "scope",
+									"value": "https://www.googleapis.com/auth/gmail.send"
+								},
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "access_type",
+									"value": "offline"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generacion de token API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Guardar access_token en variable\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.globals.set(\"access_token\", jsonData.access_token);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "4/1ASVgi3IhGFrfcwuBzAYqMVYUyNdPFIbUHgc5ZID2I5pu4qLQzQvZDZD8px8",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "243156105422-clhm8gsqeke6liladue76d15ukqdi4e8.apps.googleusercontent.com",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "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",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "urn:ietf:wg:oauth:2.0:oob",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://oauth2.googleapis.com/token",
+							"protocol": "https",
+							"host": [
+								"oauth2",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear solicitud API",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ya29.a0AXeO80R_eeJgRHKFfdLBLmvMe-X8_lNXCX1pHoeDdhpnrzWisuFcCROrVtohdUrtF7xpWOyP19eOblCZcfFGnStI27Q4bGgXbXFBnnbjDYWZzLJm9k4edvjzcPqaOZ8Cg570eXC-yu59eCHH2z5yiKmHlzBDabblEeSeujs5aCgYKAVYSARESFQHGX2MiX1h70HKEk2_D3JA6nX-yrg0175",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"raw\": \"RnJvbTogIkZhYmnDoW4iIDxmYS5kZXZlbG9wZXIudGVzdEBnbWFpbC5jb20-ClRvOiB3aW5kZmFsbC05NzhAaG90bWFpbC5jb20KU3ViamVjdDogU2FsdWRvcyBkZXNkZSBsYSBBUEkgZGUgR21haWwKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluOyBjaGFyc2V0PSJVVEYtOCIKCkhvbGEgRmFiaWFuLCDCoWVzdGUgY29ycmVvIGZ1ZSBlbnZpYWRvIHVzYW5kbyBsYSBBUEkgZGUgR21haWwhCg==\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://gmail.googleapis.com/gmail/v1/users/me/messages/send",
+							"protocol": "https",
+							"host": [
+								"gmail",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"gmail",
+								"v1",
+								"users",
+								"me",
+								"messages",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar solicitudes registadas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "usuario",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Felipe\",\r\n  \"lastName\": \"Suarez\",\r\n  \"phoneNumber\": \"3203155789\",\r\n  \"city\": \"Bogotá\",\r\n  \"neighborhood\": \"Chapinero\",\r\n  \"monthlyEnergyConsumption\": 300,\r\n  \"contractor\": {\r\n    \"id\": 3\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user-contact-requests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user-contact-requests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empresas",
+			"item": [
+				{
+					"name": "Crear empresa",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nitEnterprise\": \"123454321\",\r\n    \"nameEnterprise\": \"Solar Solutions\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/enterprise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"enterprise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar empresa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/enterprise/987654321",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"enterprise",
+								"987654321"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Login Cliente",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailClient\": \"cliente_actualizado@example.com\",\r\n    \"passwordClient\": \"passwordClientNew\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/clients/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"clients",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar un cliente",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"emailClient\": \"cliente1@example.com\",\r\n  \"passwordClient\": \"passwordClient\",\r\n  \"nameClient\": \"Juan Pérez\",\r\n  \"phoneClient\": \"3201234567\",\r\n  \"cityClient\": \"Bogotá\",\r\n  \"neighborhoodClient\": \"Chapinero\",\r\n  \"monthlyConsumptionClient\": 250.5,\r\n  \"installationTypeClient\": \"Residencial\",\r\n  \"siteConditionsClient\": \"Techo de concreto\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar clientes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar cliente por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar un cliente",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"emailClient\": \"cliente_actualizado@example.com\",\r\n  \"nameClient\": \"Juan Pérez Actualizado\",\r\n  \"phoneClient\": \"3207654321\",\r\n  \"cityClient\": \"Medellín\",\r\n  \"neighborhoodClient\": \"El Poblado\",\r\n  \"monthlyConsumptionClient\": 300.0,\r\n  \"installationTypeClient\": \"Comercial\",\r\n  \"siteConditionsClient\": \"Techo metálico\",\r\n  \"passwordClient\": \"passwordClientNew\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un cliente",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Password",
+			"value": "12345",
+			"type": "string"
+		},
+		{
+			"key": "User",
+			"value": "usuario",
+			"type": "string"
+		}
+	]
+}
