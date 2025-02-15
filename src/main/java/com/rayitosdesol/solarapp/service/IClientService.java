@@ -2,6 +2,7 @@ package com.rayitosdesol.solarapp.service;
 
 import com.rayitosdesol.solarapp.model.dto.ClientDto;
 import com.rayitosdesol.solarapp.model.entity.Client;
+
 import java.util.List;
 
 public interface IClientService {
@@ -19,4 +20,5 @@ public interface IClientService {
     void delete(ClientDto clientDto);
 
     String encodePassword(String password);
+
 }

@@ -3,6 +3,7 @@ package com.rayitosdesol.solarapp.service.impl;
 import com.rayitosdesol.solarapp.model.dao.ClientDao;
 import com.rayitosdesol.solarapp.model.dto.ClientDto;
 import com.rayitosdesol.solarapp.model.entity.Client;
+import com.rayitosdesol.solarapp.model.entity.Contractor;
 import com.rayitosdesol.solarapp.service.IClientService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,4 +101,5 @@ public class ClientServiceImpl implements IClientService {
 
         clientDao.delete(client);
     }
+
 }
