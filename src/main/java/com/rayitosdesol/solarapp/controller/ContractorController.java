@@ -29,10 +29,10 @@ public class ContractorController {
         if (contractors.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-        List<ContractorDto> contractorDto = contractors.stream()
+        List<ContractorDto> contractorDtos = contractors.stream()
                 .map(this::convertToDto)
                 .toList();
-        return ResponseEntity.ok(contractorDto);
+        return ResponseEntity.ok(contractorDtos);
     }
 
     @GetMapping("contractor/{id}")
@@ -75,7 +75,7 @@ public class ContractorController {
             if (contractorDelete == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-            contractorService.delete(convertToDto(contractorDelete));
+            contractorService.delete(contractorDelete);
             return ResponseEntity.noContent().build();
         } catch (DataAccessException e) {
             response.put("mensaje", e.getMessage());

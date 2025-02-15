@@ -2,6 +2,7 @@ package com.rayitosdesol.solarapp.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rayitosdesol.solarapp.model.dao.EnterpriseDao;
@@ -13,11 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class EnterpriseServiceImpl implements IEnterpriseService {
     
-    private final EnterpriseDao enterpriseDao;
-
-    public EnterpriseServiceImpl(EnterpriseDao enterpriseDao) {
-        this.enterpriseDao = enterpriseDao;
-    }
+    @Autowired
+    private EnterpriseDao enterpriseDao;
 
     @Override
     public Enterprise save(EnterpriseDto enterpriseDto) {

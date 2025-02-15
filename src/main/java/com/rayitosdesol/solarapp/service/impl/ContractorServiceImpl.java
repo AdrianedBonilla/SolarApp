@@ -3,6 +3,7 @@ package com.rayitosdesol.solarapp.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,15 +19,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Service
 public class ContractorServiceImpl implements IContractorService{ 
 
-    private final ContractorDao contractorDao;
-    private final EnterpriseDao enterpriseDao;
-    private final BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private ContractorDao contractorDao;
 
-    public ContractorServiceImpl(ContractorDao contractorDao, EnterpriseDao enterpriseDao, BCryptPasswordEncoder passwordEncoder) {
-        this.contractorDao = contractorDao;
-        this.enterpriseDao = enterpriseDao;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private EnterpriseDao enterpriseDao;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     @Override
@@ -96,10 +96,8 @@ public class ContractorServiceImpl implements IContractorService{
 
     @Transactional
     @Override
-    public void delete(ContractorDto contractorDto) {
-        Contractor contractor = contractorDao.findById(contractorDto.getIdContractor())
-            .orElseThrow(() -> new RuntimeException("El contratista con ID " + contractorDto.getIdContractor() + " no existe"));
-        contractorDao.delete(contractor);
+    public void delete(Contractor contractor) {
+        contractorDao.delete(contractor );
     }
 
     @Transactional

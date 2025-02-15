@@ -1,5 +1,6 @@
 package com.rayitosdesol.solarapp.service;
 
+
 import com.rayitosdesol.solarapp.model.entity.Contractor;
 import java.util.Optional;
 
