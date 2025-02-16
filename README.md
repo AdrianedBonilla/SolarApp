@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS enterprises (
 );
 
 CREATE TABLE IF NOT EXISTS contractors (
-    idContractor BIGINT AUTO_INCREMENT PRIMARY PRIMARY,
+    idContractor BIGINT AUTO_INCREMENT PRIMARY KEY,
     nameContractor VARCHAR(255) NOT NULL,
     emailContractor VARCHAR(255) UNIQUE NOT NULL,
     passwordContractor VARCHAR(255) NOT NULL,
@@ -45,14 +45,14 @@ CREATE TABLE IF NOT EXISTS contractors (
 
 CREATE TABLE clients (
     idClient BIGINT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    city VARCHAR(100) NOT NULL,
-    neighborhood VARCHAR(100) NOT NULL,
-    monthly_consumption DOUBLE NULL,
-    installation_type VARCHAR(100) NOT NULL,
-    site_conditions TEXT NOT NULL
+    emailClient VARCHAR(255) NOT NULL UNIQUE,
+    passwordClient VARCHAR(255) NOT NULL,
+    nameClient VARCHAR(255) NOT NULL,
+    phoneClient VARCHAR(20) NOT NULL,
+    cityClient VARCHAR(100) NOT NULL,
+    neighborhoodClient VARCHAR(100) NOT NULL,
+    monthlyConsumptionClient DOUBLE NULL,
+    installationTypeClient VARCHAR(100) NOT NULL,
+    siteConditionsClient TEXT NOT NULL
 );
 ```
