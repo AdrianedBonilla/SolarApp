@@ -1,8 +1,10 @@
 package com.rayitosdesol.solarapp.service.impl;
 
 import com.rayitosdesol.solarapp.model.dao.ClientDao;
+import com.rayitosdesol.solarapp.model.dao.ContractorDao;
 import com.rayitosdesol.solarapp.model.dto.ClientDto;
 import com.rayitosdesol.solarapp.model.entity.Client;
+import com.rayitosdesol.solarapp.model.entity.Contractor;
 import com.rayitosdesol.solarapp.service.IClientService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class ClientServiceImpl implements IClientService {
 
     private final ClientDao clientDao;
+    private final ContractorDao contractorDao;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public ClientServiceImpl(ClientDao clientDao, BCryptPasswordEncoder passwordEncoder) {
+    public ClientServiceImpl(ClientDao clientDao, ContractorDao contractorDao, BCryptPasswordEncoder passwordEncoder) {
         this.clientDao = clientDao;
+        this.contractorDao = contractorDao;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -26,20 +30,25 @@ public class ClientServiceImpl implements IClientService {
     @Override
     public Client save(ClientDto clientDto) {
         Client client = Client.builder()
-        .idClient(clientDto.getIdClient())
-        .emailClient(clientDto.getEmailClient())
-        .passwordClient(passwordEncoder.encode(clientDto.getPasswordClient()))
-        .nameClient(clientDto.getNameClient())
-        .phoneClient(clientDto.getPhoneClient())
-        .cityClient(clientDto.getCityClient())
-        .neighborhoodClient(clientDto.getNeighborhoodClient())
-        .monthlyConsumptionClient(clientDto.getMonthlyConsumptionClient())
-        .installationTypeClient(clientDto.getInstallationTypeClient())
-        .siteConditionsClient(clientDto.getSiteConditionsClient()).
-        build();
+                .idClient(clientDto.getIdClient())
+                .emailClient(clientDto.getEmailClient())
+                .passwordClient(passwordEncoder.encode(clientDto.getPasswordClient()))
+                .nameClient(clientDto.getNameClient())
+                .phoneClient(clientDto.getPhoneClient())
+                .cityClient(clientDto.getCityClient())
+                .neighborhoodClient(clientDto.getNeighborhoodClient())
+                .monthlyConsumptionClient(clientDto.getMonthlyConsumptionClient())
+                .installationTypeClient(clientDto.getInstallationTypeClient())
+                .siteConditionsClient(clientDto.getSiteConditionsClient())
+                .build();
+
+        if (clientDto.getContractorId() != null) {
+            Contractor contractor = contractorDao.findById(clientDto.getContractorId())
+                    .orElseThrow(() -> new RuntimeException("Contratista no encontrado"));
+            client.setContractor(contractor);
+        }
 
         return clientDao.save(client);
-
     }
 
     @Transactional(readOnly = true)
@@ -81,6 +90,12 @@ public class ClientServiceImpl implements IClientService {
                 client.setPasswordClient(encodePassword(clientDto.getPasswordClient()));
             }
 
+            if (clientDto.getContractorId() != null) {
+                Contractor contractor = contractorDao.findById(clientDto.getContractorId())
+                        .orElseThrow(() -> new RuntimeException("Contratista no encontrado"));
+                client.setContractor(contractor);
+            }
+
             return clientDao.save(client);
         } else {
             throw new RuntimeException("El cliente con ID " + clientDto.getIdClient() + " no existe");
@@ -100,5 +115,4 @@ public class ClientServiceImpl implements IClientService {
 
         clientDao.delete(client);
     }
-
 }

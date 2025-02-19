@@ -83,6 +83,7 @@ public class ClientController {
                 .monthlyConsumptionClient(client.getMonthlyConsumptionClient())
                 .installationTypeClient(client.getInstallationTypeClient())
                 .siteConditionsClient(client.getSiteConditionsClient())
+                .contractorId(client.getContractor() != null ? client.getContractor().getIdContractor() : null)
                 .build();
     }
 }
