@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/auth/contractors")
+@RequestMapping("/api/v1/auth/")
 public class ContractorAuthController {
 
     private final IContractorAuthService contractorAuthService;
@@ -18,7 +18,7 @@ public class ContractorAuthController {
         this.contractorAuthService = contractorAuthService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("contractors/login")
     public ResponseEntity<?> login(@RequestBody ContractorDto contractorDto) {
         Optional<Contractor> contractor = contractorAuthService.authenticate(
                 contractorDto.getEmailContractor(), 

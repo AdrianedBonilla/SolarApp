@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/auth/clients")
+@RequestMapping("/api/v1/auth/")
 public class ClientAuthController {
 
     private final IClienAuthtService clientAuthService;
@@ -18,7 +18,7 @@ public class ClientAuthController {
         this.clientAuthService = clientAuthService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("clients/login")
     public ResponseEntity<?> login(@RequestBody ClientDto clientDto) {
         Optional<Client> client = clientAuthService.authenticate(
                 clientDto.getEmailClient(),
