@@ -55,4 +55,31 @@ CREATE TABLE clients (
     installation_type VARCHAR(100) NOT NULL,
     site_conditions TEXT NOT NULL
 );
+
+CREATE TABLE cities (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    solarHoursPerDay DOUBLE NOT NULL
+);
+
+CREATE TABLE quotations (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    projectCost DOUBLE NOT NULL,
+    systemPower DOUBLE NOT NULL,
+    energyGeneration DOUBLE NOT NULL,
+    monthlySavings DOUBLE NOT NULL
+);
+
+INSERT INTO cities (name, solarHoursPerDay) VALUES
+('Bogotá', 4.5),
+('Medellín', 5.0),
+('Cali', 5.5),
+('Barranquilla', 6.0),
+('Cartagena', 5.8),
+('Bucaramanga', 5.2),
+('Pereira', 5.0),
+('Manizales', 4.8),
+('Santa Marta', 6.2),
+('Cúcuta', 5.7);
+
 ```
