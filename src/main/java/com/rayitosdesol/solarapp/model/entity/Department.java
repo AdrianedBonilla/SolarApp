@@ -13,8 +13,8 @@ import lombok.ToString;
 @Builder
 @ToString
 @Data
-@Table(name = "cities")
-public class City {
+@Table(name = "departments")
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,4 +24,7 @@ public class City {
 
     @Column(name = "solarHoursPerDay")
     private double solarHoursPerDay;
+
+    @Column(name = "kWhValue")
+    private double kWhValue; 
 }
