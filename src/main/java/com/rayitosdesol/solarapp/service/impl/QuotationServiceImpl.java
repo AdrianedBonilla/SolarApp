@@ -1,9 +1,9 @@
 package com.rayitosdesol.solarapp.service.impl;
 
-import com.rayitosdesol.solarapp.model.dao.CityDao;
+import com.rayitosdesol.solarapp.model.dao.DepartmentDao;
 import com.rayitosdesol.solarapp.model.dao.QuotationDao;
 import com.rayitosdesol.solarapp.model.dto.QuotationRequestDto;
-import com.rayitosdesol.solarapp.model.entity.City;
+import com.rayitosdesol.solarapp.model.entity.Department;
 import com.rayitosdesol.solarapp.model.entity.Quotation;
 import com.rayitosdesol.solarapp.service.IQuotationService;
 import com.rayitosdesol.solarapp.util.EmailUtil;
@@ -24,10 +24,10 @@ import java.util.Map;
 public class QuotationServiceImpl implements IQuotationService {
 
     private final QuotationDao quotationDao;
-    private final CityDao cityDao;
+    private final DepartmentDao cityDao;
     private final EmailUtil emailUtil;
 
-    public QuotationServiceImpl(QuotationDao quotationDao, CityDao cityDao, EmailUtil emailUtil) {
+    public QuotationServiceImpl(QuotationDao quotationDao, DepartmentDao cityDao, EmailUtil emailUtil) {
         this.quotationDao = quotationDao;
         this.cityDao = cityDao;
         this.emailUtil = emailUtil;
@@ -46,12 +46,13 @@ public class QuotationServiceImpl implements IQuotationService {
         double efficiency = 0.15;
         quotation.setSystemPower(requestDto.getArea() * efficiency);
 
-        City city = cityDao.findByName(requestDto.getLocation());
+        Department city = cityDao.findByName(requestDto.getLocation());
         double solarHoursPerDay = city != null ? city.getSolarHoursPerDay() : 5; 
+        double kWhValue = city != null ? city.getKWhValue() : 0.12;
 
         quotation.setEnergyGeneration(quotation.getSystemPower() * solarHoursPerDay * 30);
 
-        quotation.setMonthlySavings(requestDto.getMonthlyConsumption() * requestDto.getTariff());
+        quotation.setMonthlySavings(requestDto.getMonthlyConsumption() * kWhValue); 
         
         Quotation savedQuotation = quotationDao.save(quotation);
 

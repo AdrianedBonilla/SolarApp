@@ -11,7 +11,6 @@ public class QuotationRequestDto {
     private String projectType;
     private String location;
     private double monthlyConsumption;
-    private double tariff;
     private String roofType;
     private double area;
     private String firstName;

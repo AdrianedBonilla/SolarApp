@@ -744,7 +744,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"projectType\": \"residencial\",\r\n    \"location\": \"Bogotá\",\r\n    \"monthlyConsumption\": 500,\r\n    \"tariff\": 500,\r\n    \"roofType\": \"plano\",\r\n    \"area\": 100,\r\n    \"firstName\": \"Felipe\",\r\n    \"lastName\": \"Felix\",\r\n    \"email\": \"windfall-978@hotmail.com\",\r\n    \"phoneNumber\": \"3001234567\"\r\n}",
+							"raw": "{\r\n    \"projectType\": \"residencial\",\r\n    \"location\": \"Bogotá\",\r\n    \"monthlyConsumption\": 500,\r\n    \"roofType\": \"plano\",\r\n    \"area\": 100,\r\n    \"firstName\": \"Felipe\",\r\n    \"lastName\": \"Felix\",\r\n    \"email\": \"correo real para visualizar correo enviado\",\r\n    \"phoneNumber\": \"3001234567\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -823,7 +823,7 @@
 			"name": "Encriptador",
 			"item": [
 				{
-					"name": "Encriptar cotrasena",
+					"name": "Encriptar contrasena",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -860,6 +860,47 @@
 							"port": "8080",
 							"path": [
 								"encrypt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Departamentos",
+			"item": [
+				{
+					"name": "Consultar departamentos",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"departments"
 							]
 						}
 					},
