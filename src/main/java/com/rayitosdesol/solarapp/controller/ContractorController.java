@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -32,7 +31,7 @@ public class ContractorController {
         }
         List<ContractorDto> contractorDtos = contractors.stream()
                 .map(this::convertToDto)
-                .collect(Collectors.toList());
+                .toList();
         return ResponseEntity.ok(contractorDtos);
     }
 
