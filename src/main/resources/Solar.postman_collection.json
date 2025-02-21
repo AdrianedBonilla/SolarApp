@@ -823,10 +823,45 @@
 			"name": "Encriptador",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Encriptar cotrasena",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "12345",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/encrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"encrypt"
+							]
+						}
 					},
 					"response": []
 				}
