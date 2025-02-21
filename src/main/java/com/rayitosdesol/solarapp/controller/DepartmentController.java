@@ -2,6 +2,7 @@ package com.rayitosdesol.solarapp.controller;
 
 import com.rayitosdesol.solarapp.model.entity.Department;
 import com.rayitosdesol.solarapp.model.dao.DepartmentDao;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,14 +11,15 @@ import java.util.List;
 @RequestMapping("/api/v1/")
 public class DepartmentController {
 
-    private final DepartmentDao cityDao;
+    private final DepartmentDao departmentDao;
 
-    public DepartmentController(DepartmentDao cityDao) {
-        this.cityDao = cityDao;
+    public DepartmentController(DepartmentDao departmentDao) {
+        this.departmentDao = departmentDao;
     }
 
     @GetMapping("departments")
-    public List<Department> getAllCities() {
-        return cityDao.findAll();
+    public ResponseEntity<Object> getAllCities() {
+            List<Department> departments = departmentDao.findAll();
+            return ResponseEntity.ok(departments);
     }
 }
