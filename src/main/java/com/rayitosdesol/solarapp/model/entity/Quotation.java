@@ -1,5 +1,6 @@
 package com.rayitosdesol.solarapp.model.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @Data
+@Schema(hidden = true)
 @Table(name = "quotations")
 public class Quotation {
     @Id

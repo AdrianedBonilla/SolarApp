@@ -48,7 +48,7 @@ public class QuotationServiceImpl implements IQuotationService {
 
         Department city = cityDao.findByName(requestDto.getLocation());
         double solarHoursPerDay = city != null ? city.getSolarHoursPerDay() : 5; 
-        double kWhValue = city != null ? city.getKWhValue() : 0.12;
+        double kWhValue = city != null ? city.getKWhValue() : 800;
 
         quotation.setEnergyGeneration(quotation.getSystemPower() * solarHoursPerDay * 30);
 

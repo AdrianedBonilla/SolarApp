@@ -2,6 +2,7 @@ package com.rayitosdesol.solarapp.model.entity;
 
 import java.io.Serializable;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @Data
+@Schema(hidden = true)
 @Table(name = "enterprises")
 public class Enterprise implements Serializable {
 
