@@ -38,6 +38,13 @@ CREATE TABLE IF NOT EXISTS enterprises (
     nameEnterprise VARCHAR(255) NOT NULL
 );
 
+INSERT INTO enterprises (nitEnterprise, nameEnterprise) VALUES
+    ('1234567890', 'Rayitos de Sol'),
+    ('2345678901', 'Energía Verde'),
+    ('3456789012', 'Soluciones Solares'),
+    ('4567890123', 'Paneles Fotovoltaicos Ltda.'),
+    ('5678901234', 'Instalaciones Fotovoltaicas S.A.');
+
 CREATE TABLE IF NOT EXISTS contractors (
     idContractor BIGINT AUTO_INCREMENT PRIMARY KEY,
     nameContractor VARCHAR(255) NOT NULL,
@@ -65,11 +72,25 @@ CREATE TABLE IF NOT EXISTS clients (
     CONSTRAINT fk_contractor FOREIGN KEY (contractor_id) REFERENCES contractors(idContractor) ON DELETE CASCADE
 );
 
-CREATE TABLE cities (
+CREATE TABLE departments (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    solarHoursPerDay DOUBLE NOT NULL
+    solarHoursPerDay DOUBLE NOT NULL,
+    kWhValue DOUBLE NOT NULL
 );
+
+INSERT INTO departments (name, solarHoursPerDay, kWh_value) VALUES
+('Cundinamarca', 4.5, 710.42),
+('Antioquia', 5.0, 764.43),
+('Valle del Cauca', 5.5, 739.43),
+('Atlántico', 6.0, 788.88),
+('Bolívar', 5.8, 792.07),
+('Santander', 5.2, 806.87),
+('Risaralda', 5.0, 780.18),
+('Caldas', 4.8, 759.6),
+('Magdalena', 6.2, 792.07),
+('Norte de Santander', 5.7, 802.83);
+
 
 CREATE TABLE quotations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -86,23 +107,5 @@ CREATE TABLE contacts (
     messageContact TEXT NOT NULL
 );
 
-INSERT INTO cities (name, solarHoursPerDay) VALUES
-('Bogotá', 4.5),
-('Medellín', 5.0),
-('Cali', 5.5),
-('Barranquilla', 6.0),
-('Cartagena', 5.8),
-('Bucaramanga', 5.2),
-('Pereira', 5.0),
-('Manizales', 4.8),
-('Santa Marta', 6.2),
-('Cúcuta', 5.7);
-
-INSERT INTO enterprises (nitEnterprise, nameEnterprise) VALUES
-    ('1234567890', 'Rayitos de Sol'),
-    ('2345678901', 'Energía Verde'),
-    ('3456789012', 'Soluciones Solares'),
-    ('4567890123', 'Paneles Fotovoltaicos Ltda.'),
-    ('5678901234', 'Instalaciones Fotovoltaicas S.A.'):
 
 ```
