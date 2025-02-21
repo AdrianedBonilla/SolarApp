@@ -1,8 +1,10 @@
 package com.rayitosdesol.solarapp.service.impl;
 
+import com.rayitosdesol.solarapp.model.dao.ContractorDao;
 import com.rayitosdesol.solarapp.model.dao.DepartmentDao;
 import com.rayitosdesol.solarapp.model.dao.QuotationDao;
 import com.rayitosdesol.solarapp.model.dto.QuotationRequestDto;
+import com.rayitosdesol.solarapp.model.entity.Contractor;
 import com.rayitosdesol.solarapp.model.entity.Department;
 import com.rayitosdesol.solarapp.model.entity.Quotation;
 import com.rayitosdesol.solarapp.service.IQuotationService;
@@ -17,6 +19,8 @@ import freemarker.template.TemplateException;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,11 +29,13 @@ public class QuotationServiceImpl implements IQuotationService {
 
     private final QuotationDao quotationDao;
     private final DepartmentDao cityDao;
+    private final ContractorDao contractorDao;
     private final EmailUtil emailUtil;
 
-    public QuotationServiceImpl(QuotationDao quotationDao, DepartmentDao cityDao, EmailUtil emailUtil) {
+    public QuotationServiceImpl(QuotationDao quotationDao, DepartmentDao cityDao, ContractorDao contractorDao, EmailUtil emailUtil) {
         this.quotationDao = quotationDao;
         this.cityDao = cityDao;
+        this.contractorDao = contractorDao;
         this.emailUtil = emailUtil;
     }
 
@@ -53,6 +59,10 @@ public class QuotationServiceImpl implements IQuotationService {
         quotation.setEnergyGeneration(quotation.getSystemPower() * solarHoursPerDay * 30);
 
         quotation.setMonthlySavings(requestDto.getMonthlyConsumption() * kWhValue); 
+
+        // Asignar el Contractor con ID 1
+        Contractor contractor = contractorDao.findById(1L).orElseThrow(() -> new RuntimeException("Contractor not found"));
+        quotation.setContractor(contractor);
         
         Quotation savedQuotation = quotationDao.save(quotation);
 
@@ -61,6 +71,9 @@ public class QuotationServiceImpl implements IQuotationService {
         model.put("systemPower", df.format(savedQuotation.getSystemPower()));
         model.put("energyGeneration", df.format(savedQuotation.getEnergyGeneration()));
         model.put("monthlySavings", df.format(savedQuotation.getMonthlySavings()));
+        model.put("contractorName", contractor.getNameContractor());
+        model.put("projectLocation", requestDto.getLocation());
+        model.put("quotationDate", new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 
         try {
             emailUtil.sendQuotationEmail(requestDto.getEmail(), "Detalles de tu cotización de proyecto solar", model);

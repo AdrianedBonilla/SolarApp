@@ -32,4 +32,8 @@ public class Quotation {
 
     @Column(name = "monthlySavings")
     private double monthlySavings;
+
+    @ManyToOne
+    @JoinColumn(name = "contractorId", nullable = false)
+    private Contractor contractor;
 }
