@@ -17,13 +17,20 @@ spring.jpa.show-sql=true
 spring.security.user.name=
 spring.security.user.password=
 spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=
+spring.mail.password=
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.freemarker.template-loader-path=classpath:/templates/
 
 ```
 
 ### Paso 2: Crear la base de datos `solar` en MySQL
 
 ```plaintext
-USE solar;
+CREATE DATABASE solar;
 
 CREATE TABLE IF NOT EXISTS enterprises (
     idEnterprise BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -72,6 +79,13 @@ CREATE TABLE quotations (
     monthlySavings DOUBLE NOT NULL
 );
 
+CREATE TABLE contacts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nameContact VARCHAR(255) NOT NULL,
+    emailContact VARCHAR(255) NOT NULL,
+    messageContact TEXT NOT NULL
+);
+
 INSERT INTO cities (name, solarHoursPerDay) VALUES
 ('Bogotá', 4.5),
 ('Medellín', 5.0),
@@ -83,5 +97,12 @@ INSERT INTO cities (name, solarHoursPerDay) VALUES
 ('Manizales', 4.8),
 ('Santa Marta', 6.2),
 ('Cúcuta', 5.7);
+
+INSERT INTO enterprises (nitEnterprise, nameEnterprise) VALUES
+    ('1234567890', 'Rayitos de Sol'),
+    ('2345678901', 'Energía Verde'),
+    ('3456789012', 'Soluciones Solares'),
+    ('4567890123', 'Paneles Fotovoltaicos Ltda.'),
+    ('5678901234', 'Instalaciones Fotovoltaicas S.A.'):
 
 ```
