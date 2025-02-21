@@ -68,8 +68,8 @@ CREATE TABLE IF NOT EXISTS clients (
     monthlyConsumptionClient DOUBLE NULL,
     installationTypeClient VARCHAR(100) NOT NULL,
     siteConditionsClient TEXT NOT NULL,
-    contractor_id BIGINT NOT NULL,
-    CONSTRAINT fk_contractor FOREIGN KEY (contractor_id) REFERENCES contractors(idContractor) ON DELETE CASCADE
+    contractorId BIGINT NOT NULL,
+    CONSTRAINT fk_contractor FOREIGN KEY (contractorId) REFERENCES contractors(idContractor) ON DELETE CASCADE
 );
 
 CREATE TABLE departments (
@@ -79,7 +79,7 @@ CREATE TABLE departments (
     kWhValue DOUBLE NOT NULL
 );
 
-INSERT INTO departments (name, solarHoursPerDay, kWh_value) VALUES
+INSERT INTO departments (name, solarHoursPerDay, kWhValue) VALUES
 ('Cundinamarca', 4.5, 710.42),
 ('Antioquia', 5.0, 764.43),
 ('Valle del Cauca', 5.5, 739.43),
