@@ -23,7 +23,7 @@ public class Client {
     private String emailClient;
     
     @NotBlank(message = "La contraseña es obligatoria")
-    @Column(name = 	"passwordClient", nullable = false)
+    @Column(name = "passwordClient", nullable = false)
     private String passwordClient;
     
     @NotBlank(message = "El nombre es obligatorio")
@@ -53,4 +53,8 @@ public class Client {
     @NotBlank(message = "Las condiciones del sitio son obligatorias")
     @Column(name = "siteConditionsClient", nullable = false)
     private String siteConditionsClient;
+
+    @ManyToOne
+    @JoinColumn(name = "contractorId", nullable = true)
+    private Contractor contractor;
 }

@@ -18,5 +18,6 @@ public class ClientDto {
     private Double monthlyConsumptionClient;
     private String installationTypeClient;
     private String siteConditionsClient;
+    private Long contractorId;
 
 }
