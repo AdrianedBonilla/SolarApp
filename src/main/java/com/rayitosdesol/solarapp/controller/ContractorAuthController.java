@@ -3,6 +3,7 @@ package com.rayitosdesol.solarapp.controller;
 import com.rayitosdesol.solarapp.model.dto.ContractorDto;
 import com.rayitosdesol.solarapp.model.entity.Contractor;
 import com.rayitosdesol.solarapp.service.IContractorAuthService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +20,17 @@ public class ContractorAuthController {
     }
 
     @PostMapping("contractors/login")
-    public ResponseEntity<?> login(@RequestBody ContractorDto contractorDto) {
+    public ResponseEntity<Object> login(@RequestBody ContractorDto contractorDto) {
         Optional<Contractor> contractor = contractorAuthService.authenticate(
-                contractorDto.getEmailContractor(), 
-                contractorDto.getPasswordContractor(), 
+                contractorDto.getEmailContractor(),
+                contractorDto.getPasswordContractor(),
                 contractorDto.getNitEnterprise()
         );
 
         if (contractor.isPresent()) {
             return ResponseEntity.ok(convertToDto(contractor.get()));
         } else {
-            return ResponseEntity.status(401).body("Credenciales incorrectas o empresa no registrada");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas o empresa no registrada");
         }
     }
 

@@ -1,18 +1,22 @@
 package com.rayitosdesol.solarapp.controller;
 
 import com.rayitosdesol.solarapp.service.EncryptionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/encrypt")
+@RequestMapping("/api/v1/")
 public class EncryptionController {
 
-    @Autowired
-    private EncryptionService encryptionService;
+    private final EncryptionService encryptionService;
 
-    @PostMapping
-    public String encryptPassword(@RequestBody String rawPassword) {
-        return encryptionService.encrypt(rawPassword);
+    public EncryptionController(EncryptionService encryptionService) {
+        this.encryptionService = encryptionService;
+    }
+
+    @PostMapping("encrypt")
+    public ResponseEntity<Object> encryptPassword(@RequestBody String rawPassword) {
+        String encryptedPassword = encryptionService.encrypt(rawPassword);
+        return ResponseEntity.ok(encryptedPassword);
     }
 }

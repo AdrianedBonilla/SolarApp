@@ -3,6 +3,11 @@ package com.rayitosdesol.solarapp.controller;
 import com.rayitosdesol.solarapp.model.dto.QuotationRequestDto;
 import com.rayitosdesol.solarapp.model.entity.Quotation;
 import com.rayitosdesol.solarapp.service.IQuotationService;
+
+import jakarta.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +21,8 @@ public class QuotationController {
     }
 
     @PostMapping("quotations")
-    public Quotation createQuotation(@RequestBody QuotationRequestDto requestDto) {
-        return quotationService.createQuotation(requestDto);
+    public ResponseEntity<Object> createQuotation(@Valid @RequestBody QuotationRequestDto requestDto) {
+        Quotation quotation = quotationService.createQuotation(requestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(quotation);
     }
 }

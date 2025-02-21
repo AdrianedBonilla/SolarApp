@@ -3,6 +3,7 @@ package com.rayitosdesol.solarapp.controller;
 import com.rayitosdesol.solarapp.model.dto.ClientDto;
 import com.rayitosdesol.solarapp.model.entity.Client;
 import com.rayitosdesol.solarapp.service.IClienAuthtService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class ClientAuthController {
         if (client.isPresent()) {
             return ResponseEntity.ok(convertToDto(client.get()));
         } else {
-            return ResponseEntity.status(401).body("Credenciales incorrectas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
         }
     }
 
