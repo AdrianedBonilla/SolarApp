@@ -30,7 +30,7 @@ public class EnterpriseServiceImpl implements IEnterpriseService {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Enterprise> finByNit(String nitEnterprise) {
+    public Optional<Enterprise> findByNit(String nitEnterprise) {
         return enterpriseDao.findByNitEnterprise(nitEnterprise);
     
     }
