@@ -2,6 +2,7 @@ package com.rayitosdesol.solarapp.model.entity;
 
 import java.io.Serializable;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,6 +18,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @Data
+@Schema(hidden = true)
 @Table(name = "contractors")
 public class Contractor implements Serializable{
 

@@ -3,35 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles cotización</title>
+    <title>Detalles de la Cotización</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
         .container {
             width: 80%;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: 20px auto;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             color: #333;
+            text-align: center;
         }
         p {
             font-size: 16px;
             color: #555;
+            line-height: 1.5;
+        }
+        .details {
+            margin: 20px 0;
+        }
+        .details p {
+            margin: 10px 0;
+        }
+        .details strong {
+            display: inline-block;
+            width: 200px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+        .footer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Detalles cotización</h1>
-        <p><strong>Costo del proyecto:</strong> ${projectCost} COP</p>
-        <p><strong>Potencia del sistema:</strong> ${systemPower} kWp</p>
-        <p><strong>Generación de energía:</strong> ${energyGeneration} kWh/mes</p>
-        <p><strong>Ahorro mensual:</strong> ${monthlySavings} COP</p>
+        <h1>Detalles de la Cotización</h1>
+        <div class="details">
+            <p><strong>Costo del proyecto:</strong> ${projectCost} COP</p>
+            <p><strong>Potencia del sistema:</strong> ${systemPower} kWp</p>
+            <p><strong>Generación de energía:</strong> ${energyGeneration} kWh/mes</p>
+            <p><strong>Ahorro mensual:</strong> ${monthlySavings} COP</p>
+            <p><strong>Contratista:</strong> ${contractorName}</p>
+            <p><strong>Ubicación del proyecto:</strong> ${projectLocation}</p>
+            <p><strong>Fecha de la cotización:</strong> ${quotationDate}</p>
+        </div>
+        <div class="footer">
+            <p>Gracias por confiar en nosotros para su proyecto solar.</p>
+            <p>Para más información, visite nuestro sitio web: <a href="https://www.rayitosdesol.com">Rayitos de Sol</a></p>
+        </div>
     </div>
 </body>
 </html>
