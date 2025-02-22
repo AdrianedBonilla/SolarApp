@@ -148,3 +148,109 @@ Para ejecutar la aplicación, utiliza el siguiente comando en la raíz del proye
 ```
 mvn spring-boot:run
 ```
+
+## Despliegue con Docker
+Esta sección describe cómo configurar y desplegar la aplicación SolarApp utilizando Docker y Docker Compose.
+
+#### Prerrequisitos
+Docker Desktop instalado y en funcionamiento.
+Docker Compose instalado.
+
+### Paso 1: Crear el Dockerfile
+El `Dockerfile` define cómo se construye la imagen de Docker para tu aplicación Spring Boot. Asegúrate de que el archivo `Dockerfile` esté en la raíz de tu proyecto.
+
+```
+# filepath: /d:/Talento tech proyecto/SolarApp/Dockerfile
+# Utilizar una imagen base de OpenJDK
+FROM openjdk:17-jdk-alpine
+
+# Crear un directorio para la aplicación
+VOLUME /tmp
+
+# Argumento para el archivo JAR
+ARG JAR_FILE=target/solarapp-0.0.1-SNAPSHOT.jar
+
+# Copiar el archivo JAR a la imagen de Docker
+COPY ${JAR_FILE} app.jar
+
+# Exponer el puerto en el que la aplicación se ejecutará
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+```
+
+### Paso 2: Crear el archivo `docker-compose.yml`
+El archivo `docker-compose.yml` define los servicios que se ejecutarán en contenedores Docker, incluyendo la base de datos y la aplicación Spring Boot. Asegúrate de que el archivo `docker-compose.yml` esté en la raíz de tu proyecto.
+
+```
+# filepath: /d:/Talento tech proyecto/SolarApp/docker-compose.yml
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: solarapp-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: solar
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 
+    ports:
+      - "3307:3306"  # Cambiar el puerto expuesto a 3307
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: solarapp-backend
+    environment:
+      SPRING_APPLICATION_NAME: solarapp
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/solar
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_SECURITY_USER_NAME: 
+      SPRING_SECURITY_USER_PASSWORD: 
+      SPRING_JPA_HIBERNATE_NAMING_PHYSICAL_STRATEGY: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: 
+      SPRING_MAIL_PASSWORD: 
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: "true"
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: "true"
+      SPRING_FREEMARKER_TEMPLATE_LOADER_PATH: classpath:/templates/
+      SPRING_FREEMARKER_SUFFIX: .html
+      SPRINGDOC_SWAGGER_UI_PATH: /swagger-ui.html
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+  
+  ```
+
+### Paso 3: Construir y Ejecutar los Contenedores
+1. **Construir el Proyecto:** Asegúrate de que el archivo JAR de tu aplicación esté generado en el directorio `target`.
+```
+mvn clean package
+
+```
+2. **Construir las Imágenes Docker:** Usa el siguiente comando para construir las imágenes Docker.
+```
+docker-compose build
+```
+3. **Ejecutar los Contenedores:** Usa el siguiente comando para ejecutar los contenedores.
+```
+docker-compose up
+```
+### Paso 4: Verificar la Configuración 
+1. **Acceder a la Aplicación:** Una vez que los contenedores estén en funcionamiento, puedes acceder a tu aplicación en http://localhost:8080.
+1. **Acceder a la Base de Datos:** Puedes acceder a la base de datos MySQL en localhost:3306 utilizando las credenciales definidas en el archivo `docker-compose.yml`.
+3. **Documentación de las APIs:** Accede a la documentación de las APIs en Swagger en http://localhost:8080/swagger-ui.html.
