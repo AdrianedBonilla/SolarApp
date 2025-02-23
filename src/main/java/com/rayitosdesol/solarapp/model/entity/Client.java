@@ -50,15 +50,11 @@ public class Client {
     
     @NotNull(message = "El consumo mensual es obligatorio")
     @Column(name = "monthlyConsumptionClient", nullable = false)
-    private Double monthlyConsumptionClient;
+    private int monthlyConsumptionClient;
     
     @NotBlank(message = "El tipo de instalación es obligatorio")
     @Column(name = "installationTypeClient", nullable = false)
     private String installationTypeClient;
-    
-    @NotBlank(message = "Las condiciones del sitio son obligatorias")
-    @Column(name = "siteConditionsClient", nullable = false)
-    private String siteConditionsClient;
 
     @ManyToOne
     @JoinColumn(name = "contractorId", nullable = true)
