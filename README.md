@@ -195,8 +195,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 
       MYSQL_DATABASE: solar
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 
     ports:
       - "3307:3306"  # Cambiar el puerto expuesto a 3307
     volumes:
