@@ -86,12 +86,12 @@ CREATE TABLE IF NOT EXISTS clients (
     phoneClient VARCHAR(20) NOT NULL,
     cityClient VARCHAR(100) NOT NULL,
     neighborhoodClient VARCHAR(100) NOT NULL,
-    monthlyConsumptionClient DOUBLE NULL,
-    installationTypeClient VARCHAR(100) NOT NULL,
-    siteConditionsClient TEXT NOT NULL,
-    contractorId BIGINT NOT NULL,
+    monthlyConsumptionClient INT NO NULL,
+    installationTypeClient VARCHAR(255) NOT NULL,
+    contractorId BIGINT,
     CONSTRAINT fk_contractor FOREIGN KEY (contractorId) REFERENCES contractors(idContractor) ON DELETE CASCADE
 );
+
 
 -- Crear la tabla departments
 CREATE TABLE IF NOT EXISTS departments (
@@ -131,6 +131,13 @@ CREATE TABLE IF NOT EXISTS contacts (
     nameContact VARCHAR(255) NOT NULL,
     emailContact VARCHAR(255) NOT NULL,
     messageContact TEXT NOT NULL
+);
+
+CREATE TABLE subsidies (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    level VARCHAR(50) NOT NULL,
+    client_id BIGINT NOT NULL,
+    FOREIGN KEY (client_id) REFERENCES clients(idClient)
 );
 
 ```

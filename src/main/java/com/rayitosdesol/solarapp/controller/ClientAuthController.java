@@ -43,7 +43,6 @@ public class ClientAuthController {
                 .neighborhoodClient(client.getNeighborhoodClient())
                 .monthlyConsumptionClient(client.getMonthlyConsumptionClient())
                 .installationTypeClient(client.getInstallationTypeClient())
-                .siteConditionsClient(client.getSiteConditionsClient())
                 .build();
     }
 }

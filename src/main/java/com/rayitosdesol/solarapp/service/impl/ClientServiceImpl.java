@@ -3,12 +3,15 @@ package com.rayitosdesol.solarapp.service.impl;
 import com.rayitosdesol.solarapp.model.dao.ClientDao;
 import com.rayitosdesol.solarapp.model.dao.ContractorDao;
 import com.rayitosdesol.solarapp.model.dto.ClientDto;
+import com.rayitosdesol.solarapp.model.dto.SubsidyDto;
 import com.rayitosdesol.solarapp.model.entity.Client;
 import com.rayitosdesol.solarapp.model.entity.Contractor;
+import com.rayitosdesol.solarapp.model.entity.Subsidy;
 import com.rayitosdesol.solarapp.service.IClientService;
+import com.rayitosdesol.solarapp.service.ISubsidyService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,11 +22,13 @@ public class ClientServiceImpl implements IClientService {
     private final ClientDao clientDao;
     private final ContractorDao contractorDao;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final ISubsidyService subsidyService;
 
-    public ClientServiceImpl(ClientDao clientDao, ContractorDao contractorDao, BCryptPasswordEncoder passwordEncoder) {
+    public ClientServiceImpl(ClientDao clientDao, ContractorDao contractorDao, BCryptPasswordEncoder passwordEncoder, ISubsidyService subsidyService) {
         this.clientDao = clientDao;
         this.contractorDao = contractorDao;
         this.passwordEncoder = passwordEncoder;
+        this.subsidyService = subsidyService;
     }
 
     @Transactional
@@ -39,7 +44,6 @@ public class ClientServiceImpl implements IClientService {
                 .neighborhoodClient(clientDto.getNeighborhoodClient())
                 .monthlyConsumptionClient(clientDto.getMonthlyConsumptionClient())
                 .installationTypeClient(clientDto.getInstallationTypeClient())
-                .siteConditionsClient(clientDto.getSiteConditionsClient())
                 .build();
 
         if (clientDto.getContractorId() != null) {
@@ -48,7 +52,29 @@ public class ClientServiceImpl implements IClientService {
             client.setContractor(contractor);
         }
 
-        return clientDao.save(client);
+        Client savedClient = clientDao.save(client);
+
+        // Convertir ClientDto a SubsidyDto
+        SubsidyDto subsidyDto = SubsidyDto.builder()
+                .clientId(clientDto.getIdClient())
+                .lowIncome(clientDto.isLowIncome())
+                .singleParent(clientDto.isSingleParent())
+                .displaced(clientDto.isDisplaced())
+                .disabled(clientDto.isDisabled())
+                .elderly(clientDto.isElderly())
+                .limitedAccessToServices(clientDto.isLimitedAccessToServices())
+                .inadequateHousing(clientDto.isInadequateHousing())
+                .build();
+
+        // Determinar y guardar el nivel de subsidio
+        String subsidyLevel = subsidyService.determineSubsidyLevel(savedClient, subsidyDto);
+        Subsidy subsidy = Subsidy.builder()
+                .level(subsidyLevel)
+                .client(savedClient)
+                .build();
+        subsidyService.save(subsidy);
+
+        return savedClient;
     }
 
     @Transactional(readOnly = true)
@@ -84,7 +110,6 @@ public class ClientServiceImpl implements IClientService {
             client.setNeighborhoodClient(clientDto.getNeighborhoodClient());
             client.setMonthlyConsumptionClient(clientDto.getMonthlyConsumptionClient());
             client.setInstallationTypeClient(clientDto.getInstallationTypeClient());
-            client.setSiteConditionsClient(clientDto.getSiteConditionsClient());
 
             if (clientDto.getPasswordClient() != null && !clientDto.getPasswordClient().isEmpty()) {
                 client.setPasswordClient(encodePassword(clientDto.getPasswordClient()));
@@ -96,7 +121,29 @@ public class ClientServiceImpl implements IClientService {
                 client.setContractor(contractor);
             }
 
-            return clientDao.save(client);
+            Client updatedClient = clientDao.save(client);
+
+            // Convertir ClientDto a SubsidyDto
+            SubsidyDto subsidyDto = SubsidyDto.builder()
+                    .clientId(clientDto.getIdClient())
+                    .lowIncome(clientDto.isLowIncome())
+                    .singleParent(clientDto.isSingleParent())
+                    .displaced(clientDto.isDisplaced())
+                    .disabled(clientDto.isDisabled())
+                    .elderly(clientDto.isElderly())
+                    .limitedAccessToServices(clientDto.isLimitedAccessToServices())
+                    .inadequateHousing(clientDto.isInadequateHousing())
+                    .build();
+
+            // Determinar y actualizar el nivel de subsidio
+            String subsidyLevel = subsidyService.determineSubsidyLevel(updatedClient, subsidyDto);
+            Subsidy subsidy = Subsidy.builder()
+                    .level(subsidyLevel)
+                    .client(updatedClient)
+                    .build();
+            subsidyService.update(subsidy);
+
+            return updatedClient;
         } else {
             throw new RuntimeException("El cliente con ID " + clientDto.getIdClient() + " no existe");
         }

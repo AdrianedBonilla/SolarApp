@@ -38,4 +38,18 @@ public class EmailUtil {
         helper.setText(html, true);
         mailSender.send(message);
     }
+
+    public void sendSubsidyEmail(String to, String subsidyLevel) throws MessagingException, TemplateException, IOException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject("Nivel de Subsidio Aplicado");
+
+        Map<String, Object> model = Map.of("subsidyLevel", subsidyLevel);
+        Template template = freemarkerConfig.getTemplate("subsidy-email-template.html");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+
+        helper.setText(html, true);
+        mailSender.send(message);
+    }
 }

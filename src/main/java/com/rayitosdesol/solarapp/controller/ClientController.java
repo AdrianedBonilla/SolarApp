@@ -3,6 +3,7 @@ package com.rayitosdesol.solarapp.controller;
 import com.rayitosdesol.solarapp.model.dto.ClientDto;
 import com.rayitosdesol.solarapp.model.entity.Client;
 import com.rayitosdesol.solarapp.service.IClientService;
+import com.rayitosdesol.solarapp.service.ISubsidyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,11 @@ public class ClientController {
     private static final String CLIENT_NOT_FOUND = "Client not found";
 
     private final IClientService clientService;
+    private final ISubsidyService subsidyService;
 
-    public ClientController(IClientService clientService) {
+    public ClientController(IClientService clientService, ISubsidyService subsidyService) {
         this.clientService = clientService;
+        this.subsidyService = subsidyService;
     }
 
     @GetMapping("clients")
@@ -79,7 +82,6 @@ public class ClientController {
                 .neighborhoodClient(client.getNeighborhoodClient())
                 .monthlyConsumptionClient(client.getMonthlyConsumptionClient())
                 .installationTypeClient(client.getInstallationTypeClient())
-                .siteConditionsClient(client.getSiteConditionsClient())
                 .contractorId(client.getContractor() != null ? client.getContractor().getIdContractor() : null)
                 .build();
     }
