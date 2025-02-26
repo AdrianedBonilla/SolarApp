@@ -2,11 +2,9 @@ package com.rayitosdesol.solarapp.model.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 @Builder
-@ToString
 public class ClientDto {
     private Long idClient;
     private String emailClient;
@@ -15,9 +13,15 @@ public class ClientDto {
     private String phoneClient;
     private String cityClient;
     private String neighborhoodClient;
-    private Double monthlyConsumptionClient;
+    private Integer monthlyConsumptionClient;
     private String installationTypeClient;
-    private String siteConditionsClient;
     private Long contractorId;
-
+    private String subsidyLevel;
+    private boolean lowIncome;
+    private boolean singleParent;
+    private boolean displaced;
+    private boolean disabled;
+    private boolean elderly;
+    private boolean limitedAccessToServices;
+    private boolean inadequateHousing;
 }

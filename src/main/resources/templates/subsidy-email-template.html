@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles de tu Cotización de Proyecto Solar</title>
+    <title>Nivel de Subsidio Aplicado</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,19 +45,28 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Detalles de tu Cotización de Proyecto Solar</h1>
+            <h1>Nivel de Subsidio Aplicado</h1>
         </div>
         <div class="content">
             <p>Estimado cliente,</p>
-            <p>Nos complace presentarle los detalles de su cotización para el proyecto de instalación de paneles solares:</p>
-            <p>Costo del Proyecto: <span class="highlight">${projectCost} COP</span></p>
-            <p>Potencia del Sistema: <span class="highlight">${systemPower} kW</span></p>
-            <p>Generación de Energía: <span class="highlight">${energyGeneration} kWh/mes</span></p>
-            <p>Ahorros Mensuales: <span class="highlight">${monthlySavings} COP</span></p>
-            <p>Nombre del Contratista: <span class="highlight">${contractorName}</span></p>
-            <p>Ubicación del Proyecto: <span class="highlight">${projectLocation}</span></p>
-            <p>Fecha de la Cotización: <span class="highlight">${quotationDate}</span></p>
-            <p>Gracias por confiar en nosotros para su proyecto de energía solar. Si tiene alguna pregunta o necesita más información, no dude en contactarnos.</p>
+            <p>Nos complace informarle que se ha evaluado su solicitud de subsidio para el proyecto de instalación de paneles solares. A continuación, encontrará el nivel de subsidio aplicado y el porcentaje de descuento correspondiente:</p>
+            <p>Nivel de Subsidio: <span class="highlight">${subsidyLevel}</span></p>
+            <p>Porcentaje de Descuento: <span class="highlight">
+                <#if subsidyLevel == "Nivel 3">
+                    30%
+                <#elseif subsidyLevel == "Nivel 2">
+                    20%
+                <#elseif subsidyLevel == "Nivel 1">
+                    10%
+                <#else>
+                    No aplicable
+                </#if>
+            </span></p>
+            <#if subsidyLevel == "No aplicable">
+                <p>Lamentablemente, no cumple con los requisitos para aplicar al subsidio en esta ocasión. Le invitamos a revisar los criterios de elegibilidad y a contactarnos si tiene alguna pregunta.</p>
+            <#else>
+                <p>Gracias por confiar en nosotros para su proyecto de energía solar. Si tiene alguna pregunta o necesita más información, no dude en contactarnos.</p>
+            </#if>
         </div>
         <div class="footer">
             <p>Rayitos de Sol - Energía Solar para Todos</p>
