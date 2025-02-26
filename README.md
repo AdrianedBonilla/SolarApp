@@ -5,7 +5,7 @@
 ### Paso 1: Crear la Carpeta `resources`
 Asegúrate de que la carpeta `resources` esté presente en el directorio `src/main` de tu proyecto. Si no existe, créala.
 
-### Paso 2: Crear la base de datos `solar` en MySQL
+### Paso 2: Crear el archivo `application.properties`
 Crea o edita el archivo `application.properties` en la carpeta `resources` con la siguiente configuración:
 
 ```plaintext
