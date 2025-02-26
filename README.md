@@ -20,7 +20,7 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
 
 # Configuración de seguridad
 spring.security.user.name=usuario
-spring.security.user.password=$2a$10$MslT9JvXNTc5b4my0c5ESe.i2xuSpTwJWg992ZMH2MyZJfWV/mtpq
+spring.security.user.password=
 
 # Configuración de correo
 spring.mail.host=smtp.gmail.com
