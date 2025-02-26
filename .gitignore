@@ -33,7 +33,7 @@ build/
 .vscode/
 
 # Spring Boot
-src/main/resources/application.properties
+SolarApp/src/main/resources/application.properties
 
 
 # Docker
