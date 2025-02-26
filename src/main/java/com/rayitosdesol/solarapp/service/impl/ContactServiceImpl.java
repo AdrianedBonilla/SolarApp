@@ -5,6 +5,7 @@ import com.rayitosdesol.solarapp.model.dto.ContactRequestDto;
 import com.rayitosdesol.solarapp.model.entity.Contact;
 import com.rayitosdesol.solarapp.service.IContactService;
 import com.rayitosdesol.solarapp.util.EmailUtil;
+import com.rayitosdesol.solarapp.exception.EmailSendingException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +38,6 @@ public class ContactServiceImpl implements IContactService {
 
         contactDao.save(contact);
 
-        // Enviar correo electrónico con los detalles del mensaje de contacto
         Map<String, Object> modelEnterprise = new HashMap<>();
         modelEnterprise.put("nameContact", requestDto.getNameContact());
         modelEnterprise.put("emailContact", requestDto.getEmailContact());
@@ -50,8 +50,7 @@ public class ContactServiceImpl implements IContactService {
             emailUtil.sendContactEmail("fa.developer.test@gmail.com", "Nuevo Mensaje de Contacto", modelEnterprise);
             emailUtil.sendContactConfirmationEmail(requestDto.getEmailContact(), "Mensaje Recibido", modelContact);
         } catch (MessagingException | TemplateException | IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to send contact email", e);
+            throw new EmailSendingException("Failed to send contact email", e);
         }
     }
 }

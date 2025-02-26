@@ -83,7 +83,7 @@ public class ClientController {
                 .monthlyConsumptionClient(client.getMonthlyConsumptionClient())
                 .installationTypeClient(client.getInstallationTypeClient())
                 .contractorId(client.getContractor() != null ? client.getContractor().getIdContractor() : null)
-                .subsidyLevel(client.getSubsidyLevel()) // Nuevo campo
+                .subsidyLevel(client.getSubsidyLevel())
                 .build();
     }
 }

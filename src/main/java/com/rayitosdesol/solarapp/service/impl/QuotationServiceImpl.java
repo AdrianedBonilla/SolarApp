@@ -1,5 +1,6 @@
 package com.rayitosdesol.solarapp.service.impl;
 
+import com.rayitosdesol.solarapp.exception.EmailSendingException;
 import com.rayitosdesol.solarapp.model.dao.ContractorDao;
 import com.rayitosdesol.solarapp.model.dao.DepartmentDao;
 import com.rayitosdesol.solarapp.model.dao.QuotationDao;
@@ -83,7 +84,7 @@ public class QuotationServiceImpl implements IQuotationService {
             emailUtil.sendQuotationEmail(requestDto.getEmail(), "Detalles de tu cotización de proyecto solar", model);
         } catch (MessagingException | TemplateException | IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to send quotation email", e);
+            throw new EmailSendingException("Failed to send quotation email", e);
         }
 
         return savedQuotation;
