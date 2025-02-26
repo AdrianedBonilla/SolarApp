@@ -13,9 +13,10 @@ public class ClientDto {
     private String phoneClient;
     private String cityClient;
     private String neighborhoodClient;
-    private int monthlyConsumptionClient;
+    private Integer monthlyConsumptionClient;
     private String installationTypeClient;
     private Long contractorId;
+    private String subsidyLevel;
     private boolean lowIncome;
     private boolean singleParent;
     private boolean displaced;

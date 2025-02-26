@@ -3,32 +3,41 @@ package com.rayitosdesol.solarapp.service.impl;
 import com.rayitosdesol.solarapp.model.dao.ClientDao;
 import com.rayitosdesol.solarapp.model.dao.ContractorDao;
 import com.rayitosdesol.solarapp.model.dto.ClientDto;
-import com.rayitosdesol.solarapp.model.dto.SubsidyDto;
 import com.rayitosdesol.solarapp.model.entity.Client;
 import com.rayitosdesol.solarapp.model.entity.Contractor;
-import com.rayitosdesol.solarapp.model.entity.Subsidy;
 import com.rayitosdesol.solarapp.service.IClientService;
-import com.rayitosdesol.solarapp.service.ISubsidyService;
+import com.rayitosdesol.solarapp.util.EmailUtil;
+
+import freemarker.template.TemplateException;
+import jakarta.mail.MessagingException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements IClientService {
-
+   
     private final ClientDao clientDao;
     private final ContractorDao contractorDao;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final ISubsidyService subsidyService;
+    private final EmailUtil emailUtil;
 
-    public ClientServiceImpl(ClientDao clientDao, ContractorDao contractorDao, BCryptPasswordEncoder passwordEncoder, ISubsidyService subsidyService) {
+    public ClientServiceImpl(ClientDao clientDao, ContractorDao contractorDao, BCryptPasswordEncoder passwordEncoder, EmailUtil emailUtil) {
         this.clientDao = clientDao;
         this.contractorDao = contractorDao;
         this.passwordEncoder = passwordEncoder;
-        this.subsidyService = subsidyService;
+        this.emailUtil = emailUtil;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Client> findAll() {
+        return clientDao.findAll();
     }
 
     @Transactional
@@ -44,6 +53,7 @@ public class ClientServiceImpl implements IClientService {
                 .neighborhoodClient(clientDto.getNeighborhoodClient())
                 .monthlyConsumptionClient(clientDto.getMonthlyConsumptionClient())
                 .installationTypeClient(clientDto.getInstallationTypeClient())
+                .subsidyLevel(determineSubsidyLevel(clientDto))
                 .build();
 
         if (clientDto.getContractorId() != null) {
@@ -52,35 +62,7 @@ public class ClientServiceImpl implements IClientService {
             client.setContractor(contractor);
         }
 
-        Client savedClient = clientDao.save(client);
-
-        // Convertir ClientDto a SubsidyDto
-        SubsidyDto subsidyDto = SubsidyDto.builder()
-                .clientId(clientDto.getIdClient())
-                .lowIncome(clientDto.isLowIncome())
-                .singleParent(clientDto.isSingleParent())
-                .displaced(clientDto.isDisplaced())
-                .disabled(clientDto.isDisabled())
-                .elderly(clientDto.isElderly())
-                .limitedAccessToServices(clientDto.isLimitedAccessToServices())
-                .inadequateHousing(clientDto.isInadequateHousing())
-                .build();
-
-        // Determinar y guardar el nivel de subsidio
-        String subsidyLevel = subsidyService.determineSubsidyLevel(savedClient, subsidyDto);
-        Subsidy subsidy = Subsidy.builder()
-                .level(subsidyLevel)
-                .client(savedClient)
-                .build();
-        subsidyService.save(subsidy);
-
-        return savedClient;
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Client> findAll() {
-        return clientDao.findAll();
+        return clientDao.save(client);
     }
 
     @Transactional(readOnly = true)
@@ -110,6 +92,7 @@ public class ClientServiceImpl implements IClientService {
             client.setNeighborhoodClient(clientDto.getNeighborhoodClient());
             client.setMonthlyConsumptionClient(clientDto.getMonthlyConsumptionClient());
             client.setInstallationTypeClient(clientDto.getInstallationTypeClient());
+            client.setSubsidyLevel(determineSubsidyLevel(clientDto));
 
             if (clientDto.getPasswordClient() != null && !clientDto.getPasswordClient().isEmpty()) {
                 client.setPasswordClient(encodePassword(clientDto.getPasswordClient()));
@@ -123,25 +106,12 @@ public class ClientServiceImpl implements IClientService {
 
             Client updatedClient = clientDao.save(client);
 
-            // Convertir ClientDto a SubsidyDto
-            SubsidyDto subsidyDto = SubsidyDto.builder()
-                    .clientId(clientDto.getIdClient())
-                    .lowIncome(clientDto.isLowIncome())
-                    .singleParent(clientDto.isSingleParent())
-                    .displaced(clientDto.isDisplaced())
-                    .disabled(clientDto.isDisabled())
-                    .elderly(clientDto.isElderly())
-                    .limitedAccessToServices(clientDto.isLimitedAccessToServices())
-                    .inadequateHousing(clientDto.isInadequateHousing())
-                    .build();
-
-            // Determinar y actualizar el nivel de subsidio
-            String subsidyLevel = subsidyService.determineSubsidyLevel(updatedClient, subsidyDto);
-            Subsidy subsidy = Subsidy.builder()
-                    .level(subsidyLevel)
-                    .client(updatedClient)
-                    .build();
-            subsidyService.update(subsidy);
+            try {
+                emailUtil.sendSubsidyEmail(updatedClient.getEmailClient(), updatedClient.getSubsidyLevel());
+            } catch (MessagingException | TemplateException | IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Failed to send subsidy email", e);
+            }
 
             return updatedClient;
         } else {
@@ -161,5 +131,26 @@ public class ClientServiceImpl implements IClientService {
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
         clientDao.delete(client);
+    }
+
+    private String determineSubsidyLevel(ClientDto clientDto) {
+        int score = 0;
+        if (clientDto.isLowIncome()) score += 3;
+        if (clientDto.isSingleParent()) score += 2;
+        if (clientDto.isDisplaced()) score += 2;
+        if (clientDto.isDisabled()) score += 2;
+        if (clientDto.isElderly()) score += 1;
+        if (clientDto.isLimitedAccessToServices()) score += 1;
+        if (clientDto.isInadequateHousing()) score += 1;
+
+        if (score >= 8) {
+            return "Nivel 3";
+        } else if (score >= 5) {
+            return "Nivel 2";
+        } else if (score >= 3) {
+            return "Nivel 1";
+        } else {
+            return "No aplicable";
+        }
     }
 }
