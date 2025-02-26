@@ -39,7 +39,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nameContractor\": \"Juano Pérez\",\r\n    \"emailContractor\": \"juano.perez@example.com\",\r\n    \"passwordContractor\": \"securepassword\",\r\n    \"phoneContractor\": \"+573001234567\",\r\n    \"locationContractor\": \"Medellín, Colombia\",\r\n    \"expertiseContractor\": \"Instalación de paneles solares\",\r\n    \"nitEnterprise\": \"123456789\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"nameContractor\": \"Juano Pérez\",\r\n    \"emailContractor\": \"juano.perez@example.com\",\r\n    \"passwordContractor\": \"securepassword\",\r\n    \"phoneContractor\": \"+573001234567\",\r\n    \"locationContractor\": \"Medellín, Colombia\",\r\n    \"expertiseContractor\": \"Instalación de paneles solares\",\r\n    \"nitEnterprise\": \"1234567890\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,7 +91,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nameContractor\": \"Jose Pérez\",\r\n    \"emailContractor\": \"jose.perez@example.com\",\r\n    \"passwordContractor\": \"securepassword\",\r\n    \"phoneContractor\": \"+573001234567\",\r\n    \"locationContractor\": \"Medellín, Colombia\",\r\n    \"expertiseContractor\": \"Instalación de paneles solares\",\r\n    \"nitEnterprise\": \"123456789\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"nameContractor\": \"Juan Pérez\",\r\n    \"emailContractor\": \"juan.perez@example.com\",\r\n    \"phoneContractor\": \"+573001234567\",\r\n    \"locationContractor\": \"Medellín, Colombia\",\r\n    \"expertiseContractor\": \"Instalación de paneles solares\",\r\n    \"passwordContractor\": null,\r\n    \"nitEnterprise\": \"1234567890\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -99,7 +99,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/contractor/4",
+							"raw": "http://localhost:8080/api/v1/contractor/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -109,7 +109,7 @@
 								"api",
 								"v1",
 								"contractor",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -210,7 +210,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/contractor/4",
+							"raw": "http://localhost:8080/api/v1/contractor/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -220,7 +220,7 @@
 								"api",
 								"v1",
 								"contractor",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -301,7 +301,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"emailContractor\": \"juan.perez@example.com\",\r\n    \"passwordContractor\": \"securepassword\",\r\n    \"nitEnterprise\": \"123456789\"\r\n}\r\n",
+							"raw": "{\r\n    \"emailContractor\": \"juan.perez@example.com\",\r\n    \"passwordContractor\": \"securepassword\",\r\n    \"nitEnterprise\": \"1234567890\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -409,7 +409,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/enterprise/123456789",
+							"raw": "http://localhost:8080/api/v1/enterprise/1234567890",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -419,7 +419,7 @@
 								"api",
 								"v1",
 								"enterprise",
-								"123456789"
+								"1234567890"
 							]
 						}
 					},
@@ -452,7 +452,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"emailClient\": \"cliente1@example.com\",\r\n    \"passwordClient\": \"passwordClient\"\r\n}",
+							"raw": "{\r\n    \"emailClient\": \"windfall-978@hotmail.com\",\r\n    \"passwordClient\": \"password123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -499,7 +499,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"emailClient\": \"cliente1@example.com\",\r\n  \"passwordClient\": \"passwordClient\",\r\n  \"nameClient\": \"Juan Pérez\",\r\n  \"phoneClient\": \"3201234567\",\r\n  \"cityClient\": \"Bogotá\",\r\n  \"neighborhoodClient\": \"Chapinero\",\r\n  \"monthlyConsumptionClient\": 250.5,\r\n  \"installationTypeClient\": \"Residencial\",\r\n  \"siteConditionsClient\": \"Techo de concreto\",\r\n  \"contractorId\": null\r\n}\r\n",
+							"raw": "{\r\n    \"emailClient\": \"fabian.guarin@hotmail.com\",\r\n    \"passwordClient\": \"password123\",\r\n    \"nameClient\": \"Juan Perez\",\r\n    \"phoneClient\": \"1234567890\",\r\n    \"cityClient\": \"Bogotá\",\r\n    \"neighborhoodClient\": \"Chapinero\",\r\n    \"monthlyConsumptionClient\": 80,\r\n    \"installationTypeClient\": \"Residencial\",\r\n    \"contractorId\": 1,\r\n    \"lowIncome\": null,\r\n    \"singleParent\": null,\r\n    \"displaced\": null,\r\n    \"disabled\": null,\r\n    \"elderly\": null,\r\n    \"limitedAccessToServices\": null,\r\n    \"inadequateHousing\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -641,7 +641,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"emailClient\": \"cliente_actualizado@example.com\",\r\n  \"nameClient\": \"Juan Pérez Actualizado\",\r\n  \"phoneClient\": \"3207654321\",\r\n  \"cityClient\": \"Medellín\",\r\n  \"neighborhoodClient\": \"El Poblado\",\r\n  \"monthlyConsumptionClient\": 300.0,\r\n  \"installationTypeClient\": \"Comercial\",\r\n  \"siteConditionsClient\": \"Techo metálico\",\r\n  \"passwordClient\": \"passwordClientNew\"\r\n}\r\n",
+							"raw": "{\r\n    \"emailClient\": \"windfall-978@hotmail.com\",\r\n    \"passwordClient\": \"password123\",\r\n    \"nameClient\": \"Juan Perez\",\r\n    \"phoneClient\": \"1234567890\",\r\n    \"cityClient\": \"Bogotá\",\r\n    \"neighborhoodClient\": \"Chapinero\",\r\n    \"monthlyConsumptionClient\": 80,\r\n    \"installationTypeClient\": \"Residencial\",\r\n    \"contractorId\": 1,\r\n    \"lowIncome\": true,\r\n    \"singleParent\": true,\r\n    \"displaced\": false,\r\n    \"disabled\": false,\r\n    \"elderly\": false,\r\n    \"limitedAccessToServices\": false,\r\n    \"inadequateHousing\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -744,7 +744,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"projectType\": \"residencial\",\r\n    \"location\": \"Bogotá\",\r\n    \"monthlyConsumption\": 500,\r\n    \"roofType\": \"plano\",\r\n    \"area\": 100,\r\n    \"firstName\": \"Felipe\",\r\n    \"lastName\": \"Felix\",\r\n    \"email\": \"correo real para visualizar correo enviado\",\r\n    \"phoneNumber\": \"3001234567\"\r\n}",
+							"raw": "{\r\n    \"projectType\": \"residencial\",\r\n    \"location\": \"Cundinamarca\",\r\n    \"monthlyConsumption\": 500,\r\n    \"roofType\": \"plano\",\r\n    \"area\": 100,\r\n    \"firstName\": \"Felipe\",\r\n    \"lastName\": \"Felix\",\r\n    \"email\": \"windfall-978@hotmail.com\",\r\n    \"phoneNumber\": \"3001234567\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -794,7 +794,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nameContact\": \"Juan Pérez\",\r\n    \"emailContact\": \"juan.perez@example.com\",\r\n    \"messageContact\": \"Estoy interesado en obtener más información sobre sus servicios.\"\r\n}",
+							"raw": "{\r\n    \"nameContact\": \"Juan Pérez\",\r\n    \"emailContact\": \"windfall-978@hotmail.com\",\r\n    \"messageContact\": \"Estoy interesado en obtener más información sobre sus servicios.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -852,13 +852,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/encrypt",
+							"raw": "http://localhost:8080/api/v1/encrypt",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"api",
+								"v1",
 								"encrypt"
 							]
 						}
@@ -934,7 +936,7 @@
 	"variable": [
 		{
 			"key": "Password",
-			"value": "12345",
+			"value": "nuevaContraseña",
 			"type": "string"
 		},
 		{

@@ -92,7 +92,7 @@ public class ClientServiceImpl implements IClientService {
             client.setNeighborhoodClient(clientDto.getNeighborhoodClient());
             client.setMonthlyConsumptionClient(clientDto.getMonthlyConsumptionClient());
             client.setInstallationTypeClient(clientDto.getInstallationTypeClient());
-            client.setSubsidyLevel(determineSubsidyLevel(clientDto)); // Determinar el nivel de subsidio
+            client.setSubsidyLevel(determineSubsidyLevel(clientDto));
 
             if (clientDto.getPasswordClient() != null && !clientDto.getPasswordClient().isEmpty()) {
                 client.setPasswordClient(encodePassword(clientDto.getPasswordClient()));
