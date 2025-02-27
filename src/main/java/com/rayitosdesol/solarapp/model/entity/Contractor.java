@@ -32,6 +32,7 @@ public class Contractor implements Serializable{
     private String nameContractor;
 
     @Email(message = "Correo electrónico inválido")
+    @NotBlank(message = "El correo electrónico es obligatorio")
     @Column(name = "emailContractor")
     private String emailContractor;
 
@@ -40,7 +41,7 @@ public class Contractor implements Serializable{
     private String passwordContractor;
 
     @NotBlank(message = "El teléfono es obligatorio")
-    @Column(name = "phoneContractor")
+    @Column(name = "phoneContractor", length = 50)
     private String phoneContractor;
 
     @NotBlank(message = "La ubicación es obligatoria")
@@ -51,8 +52,8 @@ public class Contractor implements Serializable{
     @Column(name = "expertiseContractor")
     private String expertiseContractor;
 
-    @ManyToOne
-    @JoinColumn(name = "nitEnterprise", referencedColumnName = "nitEnterprise")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nitEnterprise", nullable = false, referencedColumnName = "nitEnterprise")
     private Enterprise enterprise;
 
 }

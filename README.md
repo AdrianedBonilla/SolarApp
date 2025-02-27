@@ -95,9 +95,9 @@ CREATE TABLE IF NOT EXISTS clients (
     neighborhoodClient VARCHAR(100) NOT NULL,
     monthlyConsumptionClient INT NOT NULL,
     installationTypeClient VARCHAR(255) NOT NULL,
-    contractorId BIGINT,
+    idContractor BIGINT,
     subsidyLevel VARCHAR(50),
-    CONSTRAINT fk_contractor FOREIGN KEY (contractorId) REFERENCES contractors(idContractor) ON DELETE CASCADE
+    CONSTRAINT fk_contractor FOREIGN KEY (idContractor) REFERENCES contractors(idContractor) ON DELETE CASCADE
 );
 
 
@@ -152,8 +152,8 @@ CREATE TABLE IF NOT EXISTS quotations (
     systemPower DOUBLE NOT NULL,
     energyGeneration DOUBLE NOT NULL,
     monthlySavings DOUBLE NOT NULL,
-    contractorId BIGINT NOT NULL,
-    CONSTRAINT fk_quotation_contractor FOREIGN KEY (contractorId) REFERENCES contractors(idContractor) ON DELETE CASCADE
+    idContractor BIGINT NOT NULL,
+    CONSTRAINT fk_quotation_contractor FOREIGN KEY (idContractor) REFERENCES contractors(idContractor) ON DELETE CASCADE
 );
 
 -- Crear la tabla contacts

@@ -1,13 +1,16 @@
 package com.rayitosdesol.solarapp.model.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;	
 import lombok.AllArgsConstructor;
@@ -37,4 +40,7 @@ public class Enterprise implements Serializable {
     @NotBlank(message = "El nombre de la empresa es obligatorio")
     @Column(name = "nameEnterprise")
     private String nameEnterprise;
+
+    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Contractor> contractors;
 }
