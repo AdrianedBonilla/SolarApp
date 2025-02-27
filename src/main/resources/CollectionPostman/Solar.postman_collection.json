@@ -347,7 +347,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/contractor/email/",
+							"raw": "http://localhost:8080/api/v1/contractor/email/juan.perez@example.com",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -358,7 +358,7 @@
 								"v1",
 								"contractor",
 								"email",
-								""
+								"juan.perez@example.com"
 							]
 						}
 					},
@@ -391,7 +391,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nitEnterprise\": \"123456789\",\r\n    \"nameEnterprise\": \"Solar Solutions\"\r\n}\r\n",
+							"raw": "{\r\n    \"nitEnterprise\": \"1234567890\",\r\n    \"nameEnterprise\": \"Rayitos de Sol\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
