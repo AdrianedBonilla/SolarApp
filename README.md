@@ -5,7 +5,7 @@
 ### Paso 1: Crear la Carpeta `resources`
 Asegúrate de que la carpeta `resources` esté presente en el directorio `src/main` de tu proyecto. Si no existe, créala.
 
-### Paso 2: Crear la base de datos `solar` en MySQL
+### Paso 2: Crear el archivo `application.properties`
 Crea o edita el archivo `application.properties` en la carpeta `resources` con la siguiente configuración:
 
 ```plaintext
@@ -76,6 +76,13 @@ CREATE TABLE IF NOT EXISTS contractors (
     nitEnterprise VARCHAR(50) NOT NULL,
     CONSTRAINT fk_contractor_enterprise FOREIGN KEY (nitEnterprise) REFERENCES enterprises(nitEnterprise) ON DELETE CASCADE
 );
+
+-- Insertar datos en la tabla contractors
+INSERT INTO contractors (nameContractor, emailContractor, passwordContractor, phoneContractor, locationContractor, expertiseContractor, nitEnterprise) VALUES
+('Juano Pérez', 'juano.perez@example.com', 'securepassword', '+573001234567', 'Medellín, Colombia', 'Instalación de paneles solares', '1234567890'),
+('María Gómez', 'maria.gomez@example.com', 'securepassword', '+573002345678', 'Bogotá, Colombia', 'Mantenimiento de sistemas solares', '2345678901'),
+('Carlos Rodríguez', 'carlos.rodriguez@example.com', 'securepassword', '+573003456789', 'Cali, Colombia', 'Diseño de sistemas solares', '3456789012'),
+('Ana Martínez', 'ana.martinez@example.com', 'securepassword', '+573004567890', 'Barranquilla, Colombia', 'Consultoría en energía solar', '4567890123');
 
 -- Crear la tabla clients
 CREATE TABLE IF NOT EXISTS clients (

@@ -7,6 +7,8 @@ import com.rayitosdesol.solarapp.model.entity.Client;
 import com.rayitosdesol.solarapp.model.entity.Contractor;
 import com.rayitosdesol.solarapp.service.IClientService;
 import com.rayitosdesol.solarapp.util.EmailUtil;
+import com.rayitosdesol.solarapp.exception.ClientNotFoundException;
+import com.rayitosdesol.solarapp.exception.EmailSendingException;
 
 import freemarker.template.TemplateException;
 import jakarta.mail.MessagingException;
@@ -110,12 +112,12 @@ public class ClientServiceImpl implements IClientService {
                 emailUtil.sendSubsidyEmail(updatedClient.getEmailClient(), updatedClient.getSubsidyLevel());
             } catch (MessagingException | TemplateException | IOException e) {
                 e.printStackTrace();
-                throw new RuntimeException("Failed to send subsidy email", e);
+                throw new EmailSendingException("Failed to send subsidy email", e);
             }
 
             return updatedClient;
         } else {
-            throw new RuntimeException("El cliente con ID " + clientDto.getIdClient() + " no existe");
+            throw new ClientNotFoundException("El cliente con ID " + clientDto.getIdClient() + " no existe");
         }
     }
 

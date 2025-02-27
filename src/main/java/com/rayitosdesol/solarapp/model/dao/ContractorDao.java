@@ -7,6 +7,5 @@ import com.rayitosdesol.solarapp.model.entity.Contractor;
 
 public interface ContractorDao extends JpaRepository<Contractor, Long> {
     Optional<Contractor> findByEmailContractorAndEnterprise_NitEnterprise(String email, String nitEnterprise);
-    Optional<Contractor> findByEmailContractor(String emailClient); 
-
+    Optional<Contractor> findByEmailContractor(String emailClient);
 }

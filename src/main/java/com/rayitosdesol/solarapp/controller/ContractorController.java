@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -42,6 +43,16 @@ public class ContractorController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(CONTRACTOR_NOT_FOUND);
         }
         return ResponseEntity.ok(convertToDto(contractor));
+    }
+
+    @GetMapping("contractor/email/{email}")
+    public ResponseEntity<Object> getContractorByEmail(@PathVariable String email) {
+        Contractor contractor = contractorService.findByEmail(email);
+        if (contractor != null) {
+            return ResponseEntity.ok(contractor);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(CONTRACTOR_NOT_FOUND);
+        }
     }
 
     @PostMapping("contractor")

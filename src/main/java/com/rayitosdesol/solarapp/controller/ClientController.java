@@ -39,6 +39,16 @@ public class ClientController {
         return ResponseEntity.ok(client);
     }
 
+    @GetMapping("client/email/{email}")
+    public ResponseEntity<Object> getClientByEmail(@PathVariable String email) {
+        Client client = clientService.findByEmail(email);
+        if (client != null) {
+            return ResponseEntity.ok(client);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(CLIENT_NOT_FOUND);
+        }
+    }
+
     @PostMapping("client")
     public ResponseEntity<Object> createClient(@Valid @RequestBody ClientDto clientDto) {
         Client clientSave = clientService.save(clientDto);
@@ -83,7 +93,7 @@ public class ClientController {
                 .monthlyConsumptionClient(client.getMonthlyConsumptionClient())
                 .installationTypeClient(client.getInstallationTypeClient())
                 .contractorId(client.getContractor() != null ? client.getContractor().getIdContractor() : null)
-                .subsidyLevel(client.getSubsidyLevel()) // Nuevo campo
+                .subsidyLevel(client.getSubsidyLevel())
                 .build();
     }
 }
