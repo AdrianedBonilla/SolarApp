@@ -33,7 +33,6 @@ public class Contact {
     private String emailContact;
 
     @NotBlank(message = "El mensaje es obligatorio")
-    @Lob
-    @Column(name = "messageContact")
+    @Column(name = "messageContact", columnDefinition = "TEXT")
     private String messageContact;
 }

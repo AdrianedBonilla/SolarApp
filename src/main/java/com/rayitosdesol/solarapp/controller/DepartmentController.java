@@ -18,7 +18,7 @@ public class DepartmentController {
     }
 
     @GetMapping("departments")
-    public ResponseEntity<Object> getAllCities() {
+    public ResponseEntity<Object> getAllDepartaments() {
             List<Department> departments = departmentDao.findAll();
             return ResponseEntity.ok(departments);
     }
