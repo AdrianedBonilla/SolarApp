@@ -34,6 +34,6 @@ public class Quotation {
     private double monthlySavings;
 
     @ManyToOne
-    @JoinColumn(name = "contractorId", nullable = false)
+    @JoinColumn(name = "idContractor", nullable = false, referencedColumnName = "idContractor")
     private Contractor contractor;
 }
