@@ -52,7 +52,7 @@ USE solar;
 -- Crear la tabla enterprises
 CREATE TABLE IF NOT EXISTS enterprises (
     idEnterprise BIGINT AUTO_INCREMENT PRIMARY KEY,
-    nitEnterprise VARCHAR(50) UNIQUE NOT NULL,
+    nitEnterprise VARCHAR(255) UNIQUE NOT NULL,
     nameEnterprise VARCHAR(255) NOT NULL
 );
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS contractors (
     phoneContractor VARCHAR(50) NOT NULL,
     locationContractor VARCHAR(255),
     expertiseContractor VARCHAR(255),
-    nitEnterprise VARCHAR(50) NOT NULL,
+    nitEnterprise VARCHAR(255) NOT NULL,
     CONSTRAINT fk_contractor_enterprise FOREIGN KEY (nitEnterprise) REFERENCES enterprises(nitEnterprise) ON DELETE CASCADE
 );
 
@@ -164,7 +164,6 @@ CREATE TABLE IF NOT EXISTS contacts (
     messageContact TEXT NOT NULL
 );
 
-
 ```
 
 ### Paso 4: Documentacion de las APIs
@@ -225,12 +224,13 @@ services:
     image: mysql:8.0
     container_name: solarapp-db
     environment:
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: solar
     ports:
-      - "3307:3306" 
+      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./src/main/resources/MySQL/solar.sql:/docker-entrypoint-initdb.d/init.sql
 
   app:
     build:
@@ -241,16 +241,16 @@ services:
       SPRING_APPLICATION_NAME: solarapp
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/solar
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
+      SPRING_DATASOURCE_PASSWORD: admin
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate
       SPRING_JPA_SHOW_SQL: "true"
-      SPRING_SECURITY_USER_NAME: 
-      SPRING_SECURITY_USER_PASSWORD: 
+      SPRING_SECURITY_USER_NAME: usuario
+      SPRING_SECURITY_USER_PASSWORD: contraseña
       SPRING_JPA_HIBERNATE_NAMING_PHYSICAL_STRATEGY: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       SPRING_MAIL_HOST: smtp.gmail.com
       SPRING_MAIL_PORT: 587
-      SPRING_MAIL_USERNAME: 
-      SPRING_MAIL_PASSWORD: 
+      SPRING_MAIL_USERNAME: tu_email@gmail.com
+      SPRING_MAIL_PASSWORD: tu_contraseña
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: "true"
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: "true"
       SPRING_FREEMARKER_TEMPLATE_LOADER_PATH: classpath:/templates/
@@ -263,7 +263,7 @@ services:
 
 volumes:
   db_data:
-  
+
   ```
 
 ### Paso 3: Construir y Ejecutar los Contenedores
@@ -282,5 +282,5 @@ docker-compose up
 ```
 ### Paso 4: Verificar la Configuración 
 1. **Acceder a la Aplicación:** Una vez que los contenedores estén en funcionamiento, puedes acceder a tu aplicación en http://localhost:8080.
-1. **Acceder a la Base de Datos:** Puedes acceder a la base de datos MySQL en localhost:3306 utilizando las credenciales definidas en el archivo `docker-compose.yml`.
+1. **Acceder a la Base de Datos:** Puedes acceder a la base de datos MySQL en localhost:3307 utilizando las credenciales definidas en el archivo `docker-compose.yml`.
 3. **Documentación de las APIs:** Accede a la documentación de las APIs en Swagger en http://localhost:8080/swagger-ui.html.
