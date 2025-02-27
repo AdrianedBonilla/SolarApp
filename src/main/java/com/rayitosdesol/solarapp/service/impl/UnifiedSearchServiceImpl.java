@@ -7,12 +7,12 @@ import com.rayitosdesol.solarapp.service.IContractorService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UnifiedSearchService {
+public class UnifiedSearchServiceImpl {
 
     private final IClientService clientService;
     private final IContractorService contractorService;
 
-    public UnifiedSearchService(IClientService clientService, IContractorService contractorService) {
+    public UnifiedSearchServiceImpl(IClientService clientService, IContractorService contractorService) {
         this.clientService = clientService;
         this.contractorService = contractorService;
     }
