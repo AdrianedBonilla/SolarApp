@@ -1,6 +1,6 @@
 package com.rayitosdesol.solarapp.controller;
 
-import com.rayitosdesol.solarapp.service.impl.UnifiedSearchService;
+import com.rayitosdesol.solarapp.service.impl.UnifiedSearchServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/")
 public class UnifiedSearchController {
 
-    private final UnifiedSearchService unifiedSearchService;
+    private final UnifiedSearchServiceImpl unifiedSearchService;
 
-    public UnifiedSearchController(UnifiedSearchService unifiedSearchService) {
+    public UnifiedSearchController(UnifiedSearchServiceImpl unifiedSearchService) {
         this.unifiedSearchService = unifiedSearchService;
     }
 
