@@ -7,17 +7,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;	
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @AllArgsConstructor
@@ -27,6 +29,7 @@ import lombok.ToString;
 @Data
 @Schema(hidden = true)
 @Table(name = "enterprises")
+@JsonIgnoreProperties({"contractors"})
 public class Enterprise implements Serializable {
 
     @Id
@@ -41,6 +44,6 @@ public class Enterprise implements Serializable {
     @Column(name = "nameEnterprise")
     private String nameEnterprise;
 
-    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "enterprise", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Contractor> contractors;
 }
