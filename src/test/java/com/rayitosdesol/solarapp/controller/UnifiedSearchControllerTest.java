@@ -1,7 +1,7 @@
 package com.rayitosdesol.solarapp.controller;
 
 import com.rayitosdesol.solarapp.controller.UnifiedSearchController;
-import com.rayitosdesol.solarapp.service.impl.UnifiedSearchService;
+import com.rayitosdesol.solarapp.service.impl.UnifiedSearchServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 class UnifiedSearchControllerTest {
 
     @Mock
-    private UnifiedSearchService unifiedSearchService;
+    private UnifiedSearchServiceImpl unifiedSearchService;
 
     @InjectMocks
     private UnifiedSearchController unifiedSearchController;
