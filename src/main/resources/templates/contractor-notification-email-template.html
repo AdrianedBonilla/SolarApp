@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Cliente Registrado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #4CAF50;
+            color: #ffffff;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #4CAF50;
+            color: #ffffff;
+            border-radius: 0 0 8px 8px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nuevo Cliente Registrado</h1>
+        </div>
+        <div class="content">
+            <p>Estimado/a contratista,</p>
+            <p>Se ha registrado un nuevo cliente con los siguientes detalles:</p>
+            <p>Nombre: <span class="highlight">${clientName}</span></p>
+            <p>Correo Electrónico: <span class="highlight">${clientEmail}</span></p>
+            <p>Teléfono: <span class="highlight">${clientPhone}</span></p>
+            <p>Ubicación: <span class="highlight">${clientLocation}</span></p>
+            <p>Por favor, póngase en contacto con el cliente lo antes posible.</p>
+        </div>
+        <div class="footer">
+            <p>Rayitos de Sol - Energía Solar para Todos</p>
+            <p>Contacto: info@rayitosdesol.com | Teléfono: +57 123 456 7890</p>
+        </div>
+    </div>
+</body>
+</html>
