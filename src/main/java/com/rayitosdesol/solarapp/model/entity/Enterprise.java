@@ -19,7 +19,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @AllArgsConstructor
@@ -43,7 +42,4 @@ public class Enterprise implements Serializable {
     @Column(name = "nameEnterprise")
     private String nameEnterprise;
 
-    @OneToMany(mappedBy = "enterprise", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<Contractor> contractors;
 }
