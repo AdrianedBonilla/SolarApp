@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS contractors (
     idContractor BIGINT AUTO_INCREMENT PRIMARY KEY,
     nameContractor VARCHAR(255) NOT NULL,
     emailContractor VARCHAR(255) UNIQUE NOT NULL,
-    passwordContractor VARCHAR(255) NOT NULL,
     phoneContractor VARCHAR(50) NOT NULL,
     locationContractor VARCHAR(255),
     expertiseContractor VARCHAR(255),
@@ -33,17 +32,16 @@ CREATE TABLE IF NOT EXISTS contractors (
 );
 
 -- Insertar datos en la tabla contractors
-INSERT INTO contractors (nameContractor, emailContractor, passwordContractor, phoneContractor, locationContractor, expertiseContractor, nitEnterprise) VALUES
-('Juano Pérez', 'juano.perez@example.com', 'securepassword', '+573001234567', 'Medellín, Colombia', 'Instalación de paneles solares', '1234567890'),
-('María Gómez', 'maria.gomez@example.com', 'securepassword', '+573002345678', 'Bogotá, Colombia', 'Mantenimiento de sistemas solares', '2345678901'),
-('Carlos Rodríguez', 'carlos.rodriguez@example.com', 'securepassword', '+573003456789', 'Cali, Colombia', 'Diseño de sistemas solares', '3456789012'),
-('Ana Martínez', 'ana.martinez@example.com', 'securepassword', '+573004567890', 'Barranquilla, Colombia', 'Consultoría en energía solar', '4567890123');
+INSERT INTO contractors (nameContractor, emailContractor, phoneContractor, locationContractor, expertiseContractor, nitEnterprise) VALUES
+('Fabian Guarin', 'windfall-978@hotmail.com', '+573001234567', 'Medellín, Colombia', 'Instalación de paneles solares', '1234567890'),
+('Adrianed Bonilla', 'adri_bonilla12@hotmail.com', '+573002345678', 'Bogotá, Colombia', 'Mantenimiento de sistemas solares', '2345678901'),
+('Carlos Rodríguez', 'carlos.rodriguez@example.com', '+573003456789', 'Cali, Colombia', 'Diseño de sistemas solares', '3456789012'),
+('Ana Martínez', 'ana.martinez@example.com', '+573004567890', 'Barranquilla, Colombia', 'Consultoría en energía solar', '4567890123');
 
 -- Crear la tabla clients
 CREATE TABLE IF NOT EXISTS clients (
     idClient BIGINT AUTO_INCREMENT PRIMARY KEY,
     emailClient VARCHAR(255) NOT NULL UNIQUE,
-    passwordClient VARCHAR(255) NOT NULL,
     nameClient VARCHAR(255) NOT NULL,
     phoneClient VARCHAR(20) NOT NULL,
     cityClient VARCHAR(100) NOT NULL,

@@ -1,0 +1,1956 @@
+{
+	"info": {
+		"_postman_id": "03a73ca0-0b41-4260-b2b3-b193599b3476",
+		"name": "Escenario solar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18326062",
+		"_collection_link": "https://interstellar-resonance-268400.postman.co/workspace/TalentoTech~1cf53c13-eec6-48b9-a1f5-17f84423a5f3/collection/18326062-03a73ca0-0b41-4260-b2b3-b193599b3476?action=share&source=collection_link&creator=18326062"
+	},
+	"item": [
+		{
+			"name": "Empresas",
+			"item": [
+				{
+					"name": "Crear empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); \r",
+									"    pm.expect(jsonData).to.have.property('idEnterprise');\r",
+									"    pm.expect(jsonData).to.have.property('nitEnterprise');\r",
+									"    pm.expect(jsonData).to.have.property('nameEnterprise');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Enterprise one is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.nitEnterprise).to.eql(\"4536723849\");\r",
+									"    pm.expect(jsonData.nameEnterprise).to.eql(\"SolarTech\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"     pm.expect(jsonData.idEnterprise).to.be.a('number');\r",
+									"     pm.expect(jsonData.nitEnterprise).to.be.a('string');\r",
+									"     pm.expect(jsonData.nameEnterprise).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Guarda nit enterprise creado\r",
+									"pm.test(\"Save id new enterprise\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"nitEnterprise\", jsonData.nitEnterprise);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nitEnterprise\": \"4536723849\",\r\n    \"nameEnterprise\": \"SolarTech\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/enterprise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"enterprise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); \r",
+									"    pm.expect(jsonData).to.have.property('idEnterprise');\r",
+									"    pm.expect(jsonData).to.have.property('nitEnterprise');\r",
+									"    pm.expect(jsonData).to.have.property('nameEnterprise');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Enterprise one is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.nitEnterprise).to.eql(\"4536723849\");\r",
+									"    pm.expect(jsonData.nameEnterprise).to.eql(\"SolarTech\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"     pm.expect(jsonData.idEnterprise).to.be.a('number');\r",
+									"     pm.expect(jsonData.nitEnterprise).to.be.a('string');\r",
+									"     pm.expect(jsonData.nameEnterprise).to.be.a('string');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/enterprise/{{nitEnterprise}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"enterprise",
+								"{{nitEnterprise}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nitEnterprise\": \"1234567890\",\r\n    \"nameEnterprise\": \"Rayitos de Sol\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/enterprise/4536723849",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"enterprise",
+								"4536723849"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contratistas",
+			"item": [
+				{
+					"name": "Registrar un contratista",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); \r",
+									"    pm.expect(jsonData).to.have.property('idContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nameContractor');\r",
+									"    pm.expect(jsonData).to.have.property('emailContractor');\r",
+									"    pm.expect(jsonData).to.have.property('phoneContractor');\r",
+									"    pm.expect(jsonData).to.have.property('locationContractor');\r",
+									"    pm.expect(jsonData).to.have.property('expertiseContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nitEnterprise');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Contractor one is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.nameContractor).to.eql(\"Fabian Guarin\"); \r",
+									"    pm.expect(jsonData.emailContractor).to.eql(\"fabian.guarin@example.com\");\r",
+									"    pm.expect(jsonData.phoneContractor).to.eql(\"+573012345678\");\r",
+									"    pm.expect(jsonData.locationContractor).to.eql(\"Medellín, Colombia\");\r",
+									"    pm.expect(jsonData.expertiseContractor).to.eql(\"Instalación de paneles solares\");\r",
+									"    pm.expect(jsonData.nitEnterprise).to.eql(\"1234567890\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"     pm.expect(jsonData.idContractor).to.be.a('number');\r",
+									"     pm.expect(jsonData.nameContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.emailContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.phoneContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.locationContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.expertiseContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.nitEnterprise).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Guarda ID contratista creado\r",
+									"pm.test(\"Save id new contractor\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"idContractor\", jsonData.idContractor);\r",
+									"});\r",
+									"\r",
+									"//Guarda email contratista creado\r",
+									"pm.test(\"Save email new contractor\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"emailContractor\", jsonData.emailContractor);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameContractor\": \"Fabian Guarin\",\r\n    \"emailContractor\": \"fabian.guarin@example.com\",\r\n    \"phoneContractor\": \"+573012345678\",\r\n    \"locationContractor\": \"Medellín, Colombia\",\r\n    \"expertiseContractor\": \"Instalación de paneles solares\",\r\n    \"nitEnterprise\": \"1234567890\"\r\n}\r\n\r\n//Valida que NIT empresa exista\r\n//Valida que no este duplicado correo",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar un contratista",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); // Fixed to check for object instead of array\r",
+									"    pm.expect(jsonData).to.have.property('idContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nameContractor');\r",
+									"    pm.expect(jsonData).to.have.property('emailContractor');\r",
+									"    pm.expect(jsonData).to.have.property('phoneContractor');\r",
+									"    pm.expect(jsonData).to.have.property('locationContractor');\r",
+									"    pm.expect(jsonData).to.have.property('expertiseContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nitEnterprise');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Contractor one is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idContractor).to.eql(pm.collectionVariables.get(\"idContractor\"));\r",
+									"    pm.expect(jsonData.nameContractor).to.eql(\"Andres Guarin\"); // Removed [0] from jsonData\r",
+									"    pm.expect(jsonData.emailContractor).to.eql(\"fabian.guarin@example.com\");\r",
+									"    pm.expect(jsonData.phoneContractor).to.eql(\"+573012345678\");\r",
+									"    pm.expect(jsonData.locationContractor).to.eql(\"Bogotá, Colombia\");\r",
+									"    pm.expect(jsonData.expertiseContractor).to.eql(\"Instalación de paneles solares\");\r",
+									"    pm.expect(jsonData.nitEnterprise).to.eql(\"1234567890\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"     pm.expect(jsonData.idContractor).to.be.a('number');\r",
+									"     pm.expect(jsonData.nameContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.emailContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.phoneContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.locationContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.expertiseContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.nitEnterprise).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									"//Guarda email contratista modifcado\r",
+									"pm.test(\"Save email new contractor\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"emailContractor\", jsonData.emailContractor);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameContractor\": \"Andres Guarin\",\r\n    \"emailContractor\": \"fabian.guarin@example.com\",\r\n    \"phoneContractor\": \"+573012345678\",\r\n    \"locationContractor\": \"Bogotá, Colombia\",\r\n    \"expertiseContractor\": \"Instalación de paneles solares\",\r\n    \"nitEnterprise\": \"1234567890\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor/{{idContractor}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor",
+								"{{idContractor}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar contratistas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('array');\r",
+									"    pm.expect(jsonData[0]).to.have.property('idContractor');\r",
+									"    pm.expect(jsonData[0]).to.have.property('emailContractor');\r",
+									"    pm.expect(jsonData[0]).to.have.property('phoneContractor');\r",
+									"    pm.expect(jsonData[0]).to.have.property('locationContractor');\r",
+									"    pm.expect(jsonData[0]).to.have.property('expertiseContractor');\r",
+									"    pm.expect(jsonData[0]).to.have.property('nitEnterprise');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Contractor one is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].idContractor).to.eql(1);\r",
+									"    pm.expect(jsonData[0].nameContractor).to.eql(\"Fabian Guarin\");\r",
+									"    pm.expect(jsonData[0].emailContractor).to.eql(\"windfall-978@hotmail.com\");\r",
+									"    pm.expect(jsonData[0].phoneContractor).to.eql(\"+573001234567\");\r",
+									"    pm.expect(jsonData[0].locationContractor).to.eql(\"Medellín, Colombia\");\r",
+									"    pm.expect(jsonData[0].expertiseContractor).to.eql(\"Instalación de paneles solares\");\r",
+									"    pm.expect(jsonData[0].nitEnterprise).to.eql(\"1234567890\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"     pm.expect(jsonData[0].idContractor).to.be.a('number');\r",
+									"     pm.expect(jsonData[0].nameContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData[0].emailContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData[0].phoneContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData[0].locationContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData[0].expertiseContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData[0].nitEnterprise).to.be.a('string');\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar contratista por email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); // Fixed to check for object instead of array\r",
+									"    pm.expect(jsonData).to.have.property('idContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nameContractor');\r",
+									"    pm.expect(jsonData).to.have.property('emailContractor');\r",
+									"    pm.expect(jsonData).to.have.property('phoneContractor');\r",
+									"    pm.expect(jsonData).to.have.property('locationContractor');\r",
+									"    pm.expect(jsonData).to.have.property('expertiseContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nitEnterprise');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Contractor one is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idContractor).to.eql(pm.collectionVariables.get(\"idContractor\"));\r",
+									"    pm.expect(jsonData.nameContractor).to.eql(\"Andres Guarin\"); // Removed [0] from jsonData\r",
+									"    pm.expect(jsonData.emailContractor).to.eql(\"fabian.guarin@example.com\");\r",
+									"    pm.expect(jsonData.phoneContractor).to.eql(\"+573012345678\");\r",
+									"    pm.expect(jsonData.locationContractor).to.eql(\"Bogotá, Colombia\");\r",
+									"    pm.expect(jsonData.expertiseContractor).to.eql(\"Instalación de paneles solares\");\r",
+									"    pm.expect(jsonData.nitEnterprise).to.eql(\"1234567890\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"     pm.expect(jsonData.idContractor).to.be.a('number');\r",
+									"     pm.expect(jsonData.nameContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.emailContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.phoneContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.locationContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.expertiseContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.nitEnterprise).to.be.a('string');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor/email/{{emailContractor}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor",
+								"email",
+								"{{emailContractor}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar contratista por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); // Fixed to check for object instead of array\r",
+									"    pm.expect(jsonData).to.have.property('idContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nameContractor');\r",
+									"    pm.expect(jsonData).to.have.property('emailContractor');\r",
+									"    pm.expect(jsonData).to.have.property('phoneContractor');\r",
+									"    pm.expect(jsonData).to.have.property('locationContractor');\r",
+									"    pm.expect(jsonData).to.have.property('expertiseContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nitEnterprise');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Contractor one is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idContractor).to.eql(pm.collectionVariables.get(\"idContractor\"));\r",
+									"    pm.expect(jsonData.nameContractor).to.eql(\"Andres Guarin\"); // Removed [0] from jsonData\r",
+									"    pm.expect(jsonData.emailContractor).to.eql(\"fabian.guarin@example.com\");\r",
+									"    pm.expect(jsonData.phoneContractor).to.eql(\"+573012345678\");\r",
+									"    pm.expect(jsonData.locationContractor).to.eql(\"Bogotá, Colombia\");\r",
+									"    pm.expect(jsonData.expertiseContractor).to.eql(\"Instalación de paneles solares\");\r",
+									"    pm.expect(jsonData.nitEnterprise).to.eql(\"1234567890\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"     pm.expect(jsonData.idContractor).to.be.a('number');\r",
+									"     pm.expect(jsonData.nameContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.emailContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.phoneContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.locationContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.expertiseContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.nitEnterprise).to.be.a('string');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor/{{idContractor}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor",
+								"{{idContractor}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un contratista",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contractor/{{idContractor}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contractor",
+								"{{idContractor}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Registrar un cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); // Fixed to check for object instead of array\r",
+									"    pm.expect(jsonData).to.have.property('idClient');\r",
+									"    pm.expect(jsonData).to.have.property('emailClient');\r",
+									"    pm.expect(jsonData).to.have.property('nameClient');\r",
+									"    pm.expect(jsonData).to.have.property('phoneClient');\r",
+									"    pm.expect(jsonData).to.have.property('cityClient');\r",
+									"    pm.expect(jsonData).to.have.property('neighborhoodClient');\r",
+									"    pm.expect(jsonData).to.have.property('monthlyConsumptionClient');\r",
+									"    pm.expect(jsonData).to.have.property('installationTypeClient');\r",
+									"    pm.expect(jsonData).to.have.property('contractorId');\r",
+									"    pm.expect(jsonData).to.have.property('subsidyLevel');\r",
+									"    pm.expect(jsonData).to.have.property('lowIncome');\r",
+									"    pm.expect(jsonData).to.have.property('singleParent');\r",
+									"    pm.expect(jsonData).to.have.property('displaced');\r",
+									"    pm.expect(jsonData).to.have.property('disabled');\r",
+									"    pm.expect(jsonData).to.have.property('elderly');\r",
+									"    pm.expect(jsonData).to.have.property('limitedAccessToServices');\r",
+									"    pm.expect(jsonData).to.have.property('inadequateHousing');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Client register is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.emailClient).to.eql(\"fabian.guarin@hotmail.com\");\r",
+									"    pm.expect(jsonData.nameClient).to.eql(\"Freddy Guarin\"); \r",
+									"    pm.expect(jsonData.phoneClient).to.eql(\"1234567890\");\r",
+									"    pm.expect(jsonData.cityClient).to.eql(\"Bogotá\");\r",
+									"    pm.expect(jsonData.neighborhoodClient).to.eql(\"Chapinero\");\r",
+									"    pm.expect(jsonData.monthlyConsumptionClient).to.eql(80);\r",
+									"    pm.expect(jsonData.installationTypeClient).to.eql(\"Residencial\");\r",
+									"    //pm.expect(jsonData.contractorId).to.eql(pm.collectionVariables.get(\"idContractor\"));\r",
+									"    pm.expect(jsonData.subsidyLevel).to.eql(\"No aplicable\");\r",
+									"    pm.expect(jsonData.lowIncome).to.eql(false);\r",
+									"    pm.expect(jsonData.singleParent).to.eql(false);\r",
+									"    pm.expect(jsonData.displaced).to.eql(false);\r",
+									"    pm.expect(jsonData.disabled).to.eql(false);\r",
+									"    pm.expect(jsonData.elderly).to.eql(false);\r",
+									"    pm.expect(jsonData.limitedAccessToServices).to.eql(false);\r",
+									"    pm.expect(jsonData.inadequateHousing).to.eql(false);\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.emailClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.nameClient).to.be.a('string'); \r",
+									"    pm.expect(jsonData.phoneClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.cityClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.neighborhoodClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.monthlyConsumptionClient).to.be.a('number');\r",
+									"    pm.expect(jsonData.installationTypeClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.contractorId).to.be.a('number');\r",
+									"    pm.expect(jsonData.subsidyLevel).to.be.a('string');\r",
+									"    pm.expect(jsonData.lowIncome).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.singleParent).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.displaced).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.disabled).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.elderly).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.limitedAccessToServices).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.inadequateHousing).to.be.a('boolean')\r",
+									"});\r",
+									"\r",
+									"//Guarda ID cliente creado\r",
+									"pm.test(\"Save id new client\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"idClient\", jsonData.idClient);\r",
+									"});\r",
+									"\r",
+									"//Guarda email cliente creado\r",
+									"pm.test(\"Save id new client\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"emailClient\", jsonData.emailClient);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailClient\": \"fabian.guarin@hotmail.com\",\r\n    \"nameClient\": \"Freddy Guarin\",\r\n    \"phoneClient\": \"1234567890\",\r\n    \"cityClient\": \"Bogotá\",\r\n    \"neighborhoodClient\": \"Chapinero\",\r\n    \"monthlyConsumptionClient\": 80,\r\n    \"installationTypeClient\": \"Residencial\",\r\n    \"contractorId\": 1,\r\n    \"lowIncome\": null,\r\n    \"singleParent\": null,\r\n    \"displaced\": null,\r\n    \"disabled\": null,\r\n    \"elderly\": null,\r\n    \"limitedAccessToServices\": null,\r\n    \"inadequateHousing\": null\r\n}\r\n\r\n\r\n//Valida que exista el contratista",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar un cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); // Fixed to check for object instead of array\r",
+									"    pm.expect(jsonData).to.have.property('idClient');\r",
+									"    pm.expect(jsonData).to.have.property('emailClient');\r",
+									"    pm.expect(jsonData).to.have.property('nameClient');\r",
+									"    pm.expect(jsonData).to.have.property('phoneClient');\r",
+									"    pm.expect(jsonData).to.have.property('cityClient');\r",
+									"    pm.expect(jsonData).to.have.property('neighborhoodClient');\r",
+									"    pm.expect(jsonData).to.have.property('monthlyConsumptionClient');\r",
+									"    pm.expect(jsonData).to.have.property('installationTypeClient');\r",
+									"    pm.expect(jsonData).to.have.property('contractorId');\r",
+									"    pm.expect(jsonData).to.have.property('subsidyLevel');\r",
+									"    pm.expect(jsonData).to.have.property('lowIncome');\r",
+									"    pm.expect(jsonData).to.have.property('singleParent');\r",
+									"    pm.expect(jsonData).to.have.property('displaced');\r",
+									"    pm.expect(jsonData).to.have.property('disabled');\r",
+									"    pm.expect(jsonData).to.have.property('elderly');\r",
+									"    pm.expect(jsonData).to.have.property('limitedAccessToServices');\r",
+									"    pm.expect(jsonData).to.have.property('inadequateHousing');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Client register is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idClient).to.eql(pm.collectionVariables.get(\"idClient\"));\r",
+									"    pm.expect(jsonData.emailClient).to.eql(\"fabian.guarin@hotmail.com\");\r",
+									"    pm.expect(jsonData.nameClient).to.eql(\"Alexander Guarin\"); \r",
+									"    pm.expect(jsonData.phoneClient).to.eql(\"3214567890\");\r",
+									"    pm.expect(jsonData.cityClient).to.eql(\"Bogotá\");\r",
+									"    pm.expect(jsonData.neighborhoodClient).to.eql(\"Alamos\");\r",
+									"    pm.expect(jsonData.monthlyConsumptionClient).to.eql(70);\r",
+									"    pm.expect(jsonData.installationTypeClient).to.eql(\"Residencial\");\r",
+									"    pm.expect(jsonData.subsidyLevel).to.eql(\"Nivel 3\");\r",
+									"\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.emailClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.nameClient).to.be.a('string'); \r",
+									"    pm.expect(jsonData.phoneClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.cityClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.neighborhoodClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.monthlyConsumptionClient).to.be.a('number');\r",
+									"    pm.expect(jsonData.installationTypeClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.contractorId).to.be.a('number');\r",
+									"    pm.expect(jsonData.subsidyLevel).to.be.a('string');\r",
+									"    pm.expect(jsonData.lowIncome).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.singleParent).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.displaced).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.disabled).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.elderly).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.limitedAccessToServices).to.be.a('boolean')\r",
+									"    pm.expect(jsonData.inadequateHousing).to.be.a('boolean')\r",
+									"});\r",
+									"\r",
+									"//Guarda ID cliente creado\r",
+									"pm.test(\"Save id new client\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"idClient\", jsonData.idClient);\r",
+									"});\r",
+									"\r",
+									"//Guarda email cliente modificado\r",
+									"pm.test(\"Save email new client\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"emailClient\", jsonData.emailClient);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idClient\": {{idClient}},\r\n    \"emailClient\": \"{{emailClient}}\",\r\n    \"nameClient\": \"Alexander Guarin\",\r\n    \"phoneClient\": \"3214567890\",\r\n    \"cityClient\": \"Bogotá\",\r\n    \"neighborhoodClient\": \"Alamos\",\r\n    \"monthlyConsumptionClient\": 70,\r\n    \"installationTypeClient\": \"Residencial\",\r\n    \"contractorId\": 1,\r\n    \"lowIncome\": true,\r\n    \"singleParent\": true,\r\n    \"displaced\": true,\r\n    \"disabled\": true,\r\n    \"elderly\": false,\r\n    \"limitedAccessToServices\": false,\r\n    \"inadequateHousing\": false\r\n}\r\n\r\n\r\n//Valida que el contratista tenga ID 1\r\n//Validar correos",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client/{{idClient}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"{{idClient}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar clientes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('array'); \r",
+									"    pm.expect(jsonData[0]).to.have.property('idClient');\r",
+									"    pm.expect(jsonData[0]).to.have.property('emailClient');\r",
+									"    pm.expect(jsonData[0]).to.have.property('nameClient');\r",
+									"    pm.expect(jsonData[0]).to.have.property('phoneClient');\r",
+									"    pm.expect(jsonData[0]).to.have.property('cityClient');\r",
+									"    pm.expect(jsonData[0]).to.have.property('neighborhoodClient');\r",
+									"    pm.expect(jsonData[0]).to.have.property('monthlyConsumptionClient');\r",
+									"    pm.expect(jsonData[0]).to.have.property('installationTypeClient');\r",
+									"    pm.expect(jsonData[0]).to.have.property('subsidyLevel');\r",
+									"    pm.expect(jsonData[0].contractor).to.have.property('idContractor');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Client register is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].idClient).to.eql(pm.collectionVariables.get(\"idClient\"));\r",
+									"    pm.expect(jsonData[0].emailClient).to.eql(\"fabian.guarin@hotmail.com\");\r",
+									"    pm.expect(jsonData[0].nameClient).to.eql(\"Alexander Guarin\");\r",
+									"    pm.expect(jsonData[0].phoneClient).to.eql(\"3214567890\");\r",
+									"    pm.expect(jsonData[0].cityClient).to.eql(\"Bogotá\");\r",
+									"    pm.expect(jsonData[0].neighborhoodClient).to.eql(\"Alamos\");\r",
+									"    pm.expect(jsonData[0].monthlyConsumptionClient).to.eql(70);\r",
+									"    pm.expect(jsonData[0].installationTypeClient).to.eql(\"Residencial\");\r",
+									"    pm.expect(jsonData[0].subsidyLevel).to.eql(\"Nivel 3\");\r",
+									"});\r",
+									"\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].idClient).to.be.a('number');\r",
+									"    pm.expect(jsonData[0].emailClient).to.be.a('string');\r",
+									"    pm.expect(jsonData[0].nameClient).to.be.a('string');\r",
+									"    pm.expect(jsonData[0].phoneClient).to.be.a('string');\r",
+									"    pm.expect(jsonData[0].cityClient).to.be.a('string');\r",
+									"    pm.expect(jsonData[0].neighborhoodClient).to.be.a('string');\r",
+									"    pm.expect(jsonData[0].monthlyConsumptionClient).to.be.a('number');\r",
+									"    pm.expect(jsonData[0].installationTypeClient).to.be.a('string');\r",
+									"    pm.expect(jsonData[0].subsidyLevel).to.be.a('string');\r",
+									"    pm.expect(jsonData[0].contractor.idContractor).to.be.a('number');\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar cliente por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON://Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); \r",
+									"    pm.expect(jsonData).to.have.property('idClient');\r",
+									"    pm.expect(jsonData).to.have.property('emailClient');\r",
+									"    pm.expect(jsonData).to.have.property('nameClient');\r",
+									"    pm.expect(jsonData).to.have.property('phoneClient');\r",
+									"    pm.expect(jsonData).to.have.property('cityClient');\r",
+									"    pm.expect(jsonData).to.have.property('neighborhoodClient');\r",
+									"    pm.expect(jsonData).to.have.property('monthlyConsumptionClient');\r",
+									"    pm.expect(jsonData).to.have.property('installationTypeClient');\r",
+									"    pm.expect(jsonData).to.have.property('subsidyLevel');\r",
+									"    pm.expect(jsonData.contractor).to.have.property('idContractor');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Client register is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idClient).to.eql(pm.collectionVariables.get(\"idClient\"));\r",
+									"    pm.expect(jsonData.emailClient).to.eql(\"fabian.guarin@hotmail.com\");\r",
+									"    pm.expect(jsonData.nameClient).to.eql(\"Alexander Guarin\");\r",
+									"    pm.expect(jsonData.phoneClient).to.eql(\"3214567890\");\r",
+									"    pm.expect(jsonData.cityClient).to.eql(\"Bogotá\");\r",
+									"    pm.expect(jsonData.neighborhoodClient).to.eql(\"Alamos\");\r",
+									"    pm.expect(jsonData.monthlyConsumptionClient).to.eql(70);\r",
+									"    pm.expect(jsonData.installationTypeClient).to.eql(\"Residencial\");\r",
+									"    pm.expect(jsonData.subsidyLevel).to.eql(\"Nivel 3\");\r",
+									"});\r",
+									"\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idClient).to.be.a('number');\r",
+									"    pm.expect(jsonData.emailClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.nameClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.phoneClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.cityClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.neighborhoodClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.monthlyConsumptionClient).to.be.a('number');\r",
+									"    pm.expect(jsonData.installationTypeClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.subsidyLevel).to.be.a('string');\r",
+									"    pm.expect(jsonData.contractor.idContractor).to.be.a('number');\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client/{{idClient}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"{{idClient}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar cliente por email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON://Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); \r",
+									"    pm.expect(jsonData).to.have.property('idClient');\r",
+									"    pm.expect(jsonData).to.have.property('emailClient');\r",
+									"    pm.expect(jsonData).to.have.property('nameClient');\r",
+									"    pm.expect(jsonData).to.have.property('phoneClient');\r",
+									"    pm.expect(jsonData).to.have.property('cityClient');\r",
+									"    pm.expect(jsonData).to.have.property('neighborhoodClient');\r",
+									"    pm.expect(jsonData).to.have.property('monthlyConsumptionClient');\r",
+									"    pm.expect(jsonData).to.have.property('installationTypeClient');\r",
+									"    pm.expect(jsonData).to.have.property('subsidyLevel');\r",
+									"    pm.expect(jsonData.contractor).to.have.property('idContractor');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Client register is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idClient).to.eql(pm.collectionVariables.get(\"idClient\"));\r",
+									"    pm.expect(jsonData.emailClient).to.eql(\"fabian.guarin@hotmail.com\");\r",
+									"    pm.expect(jsonData.nameClient).to.eql(\"Alexander Guarin\");\r",
+									"    pm.expect(jsonData.phoneClient).to.eql(\"3214567890\");\r",
+									"    pm.expect(jsonData.cityClient).to.eql(\"Bogotá\");\r",
+									"    pm.expect(jsonData.neighborhoodClient).to.eql(\"Alamos\");\r",
+									"    pm.expect(jsonData.monthlyConsumptionClient).to.eql(70);\r",
+									"    pm.expect(jsonData.installationTypeClient).to.eql(\"Residencial\");\r",
+									"    pm.expect(jsonData.subsidyLevel).to.eql(\"Nivel 3\");\r",
+									"});\r",
+									"\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idClient).to.be.a('number');\r",
+									"    pm.expect(jsonData.emailClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.nameClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.phoneClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.cityClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.neighborhoodClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.monthlyConsumptionClient).to.be.a('number');\r",
+									"    pm.expect(jsonData.installationTypeClient).to.be.a('string');\r",
+									"    pm.expect(jsonData.subsidyLevel).to.be.a('string');\r",
+									"    pm.expect(jsonData.contractor.idContractor).to.be.a('number');\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client/email/{{emailClient}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"email",
+								"{{emailClient}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/client/{{idClient}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"{{idClient}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cotizacion",
+			"item": [
+				{
+					"name": "Calculadora",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData).to.have.property('projectCost');\r",
+									"    pm.expect(jsonData).to.have.property('systemPower');\r",
+									"    pm.expect(jsonData).to.have.property('energyGeneration');\r",
+									"    pm.expect(jsonData).to.have.property('monthlySavings');\r",
+									"    pm.expect(jsonData).to.have.property('contractor');\r",
+									"    pm.expect(jsonData.contractor).to.have.property('idContractor');\r",
+									"    pm.expect(jsonData.contractor).to.have.property('nameContractor');\r",
+									"    pm.expect(jsonData.contractor).to.have.property('emailContractor');\r",
+									"    pm.expect(jsonData.contractor).to.have.property('phoneContractor');\r",
+									"    pm.expect(jsonData.contractor).to.have.property('locationContractor');\r",
+									"    pm.expect(jsonData.contractor).to.have.property('expertiseContractor');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Client register is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.projectCost).to.eql(4.5E8);\r",
+									"    pm.expect(jsonData.systemPower).to.eql(15.0);\r",
+									"    pm.expect(jsonData.energyGeneration).to.eql(2025.0);\r",
+									"    pm.expect(jsonData.monthlySavings).to.eql(355210.0);\r",
+									"    pm.expect(jsonData.contractor.idContractor).to.eql(1);\r",
+									"    pm.expect(jsonData.contractor.nameContractor).to.eql(\"Fabian Guarin\");\r",
+									"    pm.expect(jsonData.contractor.emailContractor).to.eql(\"windfall-978@hotmail.com\");\r",
+									"    pm.expect(jsonData.contractor.phoneContractor).to.eql(\"+573001234567\");\r",
+									"    pm.expect(jsonData.contractor.locationContractor).to.eql(\"Medellín, Colombia\");\r",
+									"    pm.expect(jsonData.contractor.expertiseContractor).to.eql(\"Instalación de paneles solares\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.be.a('number');\r",
+									"    pm.expect(jsonData.projectCost).to.be.a('number');\r",
+									"    pm.expect(jsonData.systemPower).to.be.a('number');\r",
+									"    pm.expect(jsonData.energyGeneration).to.be.a('number');\r",
+									"    pm.expect(jsonData.monthlySavings).to.be.a('number');\r",
+									"    pm.expect(jsonData.contractor.idContractor).to.be.a('number');\r",
+									"    pm.expect(jsonData.contractor.nameContractor).to.be.a('string');\r",
+									"    pm.expect(jsonData.contractor.emailContractor).to.be.a('string');\r",
+									"    pm.expect(jsonData.contractor.phoneContractor).to.be.a('string');\r",
+									"    pm.expect(jsonData.contractor.locationContractor).to.be.a('string');\r",
+									"    pm.expect(jsonData.contractor.expertiseContractor).to.be.a('string');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"projectType\": \"residencial\",\r\n    \"location\": \"Cundinamarca\",\r\n    \"monthlyConsumption\": 500,\r\n    \"roofType\": \"plano\",\r\n    \"area\": 100,\r\n    \"firstName\": \"Felipe\",\r\n    \"lastName\": \"Felix\",\r\n    \"email\": \"windfall-978@hotmail.com\",\r\n    \"phoneNumber\": \"3001234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/quotations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"quotations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contactenos",
+			"item": [
+				{
+					"name": "Contactenos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameContact\": \"Julian Alberto Gomez\",\r\n    \"emailContact\": \"windfall-978@hotmail.com\",\r\n    \"messageContact\": \"Estoy interesado en obtener más información sobre sus servicios.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contact",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contact"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Departamentos",
+			"item": [
+				{
+					"name": "Consultar departamentos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('array');\r",
+									"    pm.expect(jsonData[0]).to.have.property('id');\r",
+									"    pm.expect(jsonData[0]).to.have.property('name');\r",
+									"    pm.expect(jsonData[0]).to.have.property('solarHoursPerDay');\r",
+									"    pm.expect(jsonData[0]).to.have.property('kwhValue');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Department names are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].name).to.eql(\"Cundinamarca\");\r",
+									"    pm.expect(jsonData[1].name).to.eql(\"Antioquia\");\r",
+									"    pm.expect(jsonData[2].name).to.eql(\"Valle del Cauca\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].id).to.be.a('number');\r",
+									"    pm.expect(jsonData[0].name).to.be.a('string');\r",
+									"    pm.expect(jsonData[0].solarHoursPerDay).to.be.a('number');\r",
+									"    pm.expect(jsonData[0].kwhValue).to.be.a('number');\r",
+									"});\r",
+									"//Validar el rango de valores de un campo:\r",
+									"pm.test(\"kWh value is within expected range\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    jsonData.forEach(function(department) {\r",
+									"        pm.expect(department.kwhValue).to.be.within(690, 820);\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"departments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contratista y cliente",
+			"item": [
+				{
+					"name": "Consultar por email de client o contratista",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Validar el código de estado de la respuesta:\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Validar la estructura de la respuesta JSON:\r",
+									"pm.test(\"Response structure is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object'); // Fixed to check for object instead of array\r",
+									"    pm.expect(jsonData).to.have.property('idContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nameContractor');\r",
+									"    pm.expect(jsonData).to.have.property('emailContractor');\r",
+									"    pm.expect(jsonData).to.have.property('phoneContractor');\r",
+									"    pm.expect(jsonData).to.have.property('locationContractor');\r",
+									"    pm.expect(jsonData).to.have.property('expertiseContractor');\r",
+									"    pm.expect(jsonData).to.have.property('nitEnterprise');\r",
+									"});\r",
+									"//Validar valores específicos dentro de la respuesta:\r",
+									"pm.test(\"Contractor one is correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idContractor).to.eql(2);\r",
+									"    pm.expect(jsonData.nameContractor).to.eql(\"Adrianed Bonilla\"); \r",
+									"    pm.expect(jsonData.emailContractor).to.eql(\"adri_bonilla12@hotmail.com\");\r",
+									"    pm.expect(jsonData.phoneContractor).to.eql(\"+573002345678\");\r",
+									"    pm.expect(jsonData.locationContractor).to.eql(\"Bogotá, Colombia\");\r",
+									"    pm.expect(jsonData.expertiseContractor).to.eql(\"Mantenimiento de sistemas solares\");\r",
+									"    pm.expect(jsonData.nitEnterprise).to.eql(\"2345678901\");\r",
+									"});\r",
+									"//Validar el tipo de datos de cada campo:\r",
+									"pm.test(\"Data types are correct\", function () {\r",
+									"     var jsonData = pm.response.json();\r",
+									"     pm.expect(jsonData.idContractor).to.be.a('number');\r",
+									"     pm.expect(jsonData.nameContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.emailContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.phoneContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.locationContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.expertiseContractor).to.be.a('string');\r",
+									"     pm.expect(jsonData.nitEnterprise).to.be.a('string');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{User}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/search/email/adri_bonilla12@hotmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"search",
+								"email",
+								"adri_bonilla12@hotmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Password",
+			"value": "12345",
+			"type": "string"
+		},
+		{
+			"key": "User",
+			"value": "usuario",
+			"type": "string"
+		},
+		{
+			"key": "clienSecret",
+			"value": "sj_gdMdPg3aFWKSRbG0vBJZlVU_RJwIpUY1pDGBOXsUcZjJbiPrHNu_J_om3THI1",
+			"type": "string"
+		},
+		{
+			"key": "clientId",
+			"value": "B1G470PDvH0dl2LHjeYWN24chaNzmuuG",
+			"type": "string"
+		},
+		{
+			"key": "audience",
+			"value": "authentication ",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "idContractor",
+			"value": ""
+		},
+		{
+			"key": "emailContractor",
+			"value": ""
+		},
+		{
+			"key": "idClient",
+			"value": ""
+		},
+		{
+			"key": "emailClient",
+			"value": ""
+		},
+		{
+			"key": "nitEnterprise",
+			"value": ""
+		}
+	]
+}

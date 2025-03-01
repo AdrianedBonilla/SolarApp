@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS contractors (
 
 -- Insertar datos en la tabla contractors
 INSERT INTO contractors (nameContractor, emailContractor, phoneContractor, locationContractor, expertiseContractor, nitEnterprise) VALUES
-('Fabian Guarin, 'windfall-978@hotmail.com', '+573001234567', 'Medellín, Colombia', 'Instalación de paneles solares', '1234567890'),
+('Fabian Guarin', 'windfall-978@hotmail.com', '+573001234567', 'Medellín, Colombia', 'Instalación de paneles solares', '1234567890'),
 ('Adrianed Bonilla', 'adri_bonilla12@hotmail.com', '+573002345678', 'Bogotá, Colombia', 'Mantenimiento de sistemas solares', '2345678901'),
 ('Carlos Rodríguez', 'carlos.rodriguez@example.com', '+573003456789', 'Cali, Colombia', 'Diseño de sistemas solares', '3456789012'),
 ('Ana Martínez', 'ana.martinez@example.com', '+573004567890', 'Barranquilla, Colombia', 'Consultoría en energía solar', '4567890123');
