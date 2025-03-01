@@ -37,10 +37,6 @@ public class Contractor implements Serializable {
     @Column(name = "emailContractor")
     private String emailContractor;
 
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Column(name = "passwordContractor")
-    private String passwordContractor;
-
     @NotBlank(message = "El teléfono es obligatorio")
     @Column(name = "phoneContractor", length = 50)
     private String phoneContractor;

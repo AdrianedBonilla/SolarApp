@@ -19,6 +19,4 @@ public interface IClientService {
     
     void delete(ClientDto clientDto);
 
-    String encodePassword(String password);
-
 }

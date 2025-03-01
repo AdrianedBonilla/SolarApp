@@ -22,9 +22,6 @@ public class Client {
     @NotBlank(message = "El correo electrónico es obligatorio")
     @Column(name = "emailClient")
     private String emailClient;
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Column(name = "passwordClient")
-    private String passwordClient;
     @NotBlank(message = "El nombre es obligatorio")
     @Column(name = "nameClient", length = 255)
     private String nameClient;

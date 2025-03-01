@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -34,9 +33,6 @@ class ClientServiceImplTest {
     private ContractorDao contractorDao;
 
     @Mock
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Mock
     private EmailUtil emailUtil;
 
     @InjectMocks
@@ -52,7 +48,6 @@ class ClientServiceImplTest {
         ClientDto clientDto = ClientDto.builder()
                 .idClient(1L)
                 .emailClient("john.doe@example.com")
-                .passwordClient("password")
                 .nameClient("John Doe")
                 .phoneClient("1234567890")
                 .cityClient("City")
@@ -70,7 +65,6 @@ class ClientServiceImplTest {
         Client client = Client.builder()
                 .idClient(1L)
                 .emailClient("john.doe@example.com")
-                .passwordClient("encodedPassword")
                 .nameClient("John Doe")
                 .phoneClient("1234567890")
                 .cityClient("City")
@@ -81,7 +75,6 @@ class ClientServiceImplTest {
                 .build();
 
         when(contractorDao.findById(any(Long.class))).thenReturn(Optional.of(contractor));
-        when(passwordEncoder.encode(any(String.class))).thenReturn("encodedPassword");
         when(clientDao.save(any(Client.class))).thenReturn(client);
 
         Client savedClient = clientService.save(clientDto);
@@ -95,7 +88,6 @@ class ClientServiceImplTest {
         ClientDto clientDto = ClientDto.builder()
                 .idClient(1L)
                 .emailClient("john.doe@example.com")
-                .passwordClient("password")
                 .nameClient("John Doe")
                 .phoneClient("1234567890")
                 .cityClient("City")
@@ -119,7 +111,6 @@ class ClientServiceImplTest {
         ClientDto clientDto = ClientDto.builder()
                 .idClient(1L)
                 .emailClient("john.doe@example.com")
-                .passwordClient("password")
                 .nameClient("John Doe")
                 .phoneClient("1234567890")
                 .cityClient("City")
@@ -143,7 +134,6 @@ class ClientServiceImplTest {
         ClientDto clientDto = ClientDto.builder()
                 .idClient(1L)
                 .emailClient("john.doe@example.com")
-                .passwordClient("password")
                 .nameClient("John Doe")
                 .phoneClient("1234567890")
                 .cityClient("City")
@@ -161,7 +151,6 @@ class ClientServiceImplTest {
         Client client = Client.builder()
                 .idClient(1L)
                 .emailClient("john.doe@example.com")
-                .passwordClient("encodedPassword")
                 .nameClient("John Doe")
                 .phoneClient("1234567890")
                 .cityClient("City")

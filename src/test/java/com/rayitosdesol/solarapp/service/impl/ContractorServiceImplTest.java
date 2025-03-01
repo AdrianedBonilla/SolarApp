@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -27,8 +26,6 @@ class ContractorServiceImplTest {
     @Mock
     private EnterpriseDao enterpriseDao;
 
-    @Mock
-    private BCryptPasswordEncoder passwordEncoder;
 
     @InjectMocks
     private ContractorServiceImpl contractorService;
@@ -47,7 +44,6 @@ class ContractorServiceImplTest {
                 .phoneContractor("1234567890")
                 .locationContractor("Location")
                 .expertiseContractor("Expertise")
-                .passwordContractor("password")
                 .nitEnterprise("1234567890")
                 .build();
 
@@ -63,12 +59,10 @@ class ContractorServiceImplTest {
                 .phoneContractor("1234567890")
                 .locationContractor("Location")
                 .expertiseContractor("Expertise")
-                .passwordContractor("encodedPassword")
                 .enterprise(enterprise)
                 .build();
 
         when(enterpriseDao.findByNitEnterprise(any(String.class))).thenReturn(Optional.of(enterprise));
-        when(passwordEncoder.encode(any(String.class))).thenReturn("encodedPassword");
         when(contractorDao.save(any(Contractor.class))).thenReturn(contractor);
 
         Contractor savedContractor = contractorService.save(contractorDto);
@@ -86,7 +80,6 @@ class ContractorServiceImplTest {
                 .phoneContractor("1234567890")
                 .locationContractor("Location")
                 .expertiseContractor("Expertise")
-                .passwordContractor("password")
                 .nitEnterprise("1234567890")
                 .build();
 

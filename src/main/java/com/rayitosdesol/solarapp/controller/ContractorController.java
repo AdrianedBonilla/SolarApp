@@ -48,7 +48,7 @@ public class ContractorController {
     public ResponseEntity<Object> getContractorByEmail(@PathVariable String email) {
         Contractor contractor = contractorService.findByEmail(email);
         if (contractor != null) {
-            return ResponseEntity.ok(contractor);
+            return ResponseEntity.ok(convertToDto((Contractor) contractor));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(CONTRACTOR_NOT_FOUND);
         }
