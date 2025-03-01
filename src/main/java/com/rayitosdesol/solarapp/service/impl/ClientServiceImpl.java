@@ -13,7 +13,6 @@ import com.rayitosdesol.solarapp.exception.EmailSendingException;
 import freemarker.template.TemplateException;
 import jakarta.mail.MessagingException;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,13 +25,11 @@ public class ClientServiceImpl implements IClientService {
    
     private final ClientDao clientDao;
     private final ContractorDao contractorDao;
-    private final BCryptPasswordEncoder passwordEncoder;
     private final EmailUtil emailUtil;
 
-    public ClientServiceImpl(ClientDao clientDao, ContractorDao contractorDao, BCryptPasswordEncoder passwordEncoder, EmailUtil emailUtil) {
+    public ClientServiceImpl(ClientDao clientDao, ContractorDao contractorDao, EmailUtil emailUtil) {
         this.clientDao = clientDao;
         this.contractorDao = contractorDao;
-        this.passwordEncoder = passwordEncoder;
         this.emailUtil = emailUtil;
     }
 
@@ -48,7 +45,6 @@ public class ClientServiceImpl implements IClientService {
         Client client = Client.builder()
                 .idClient(clientDto.getIdClient())
                 .emailClient(clientDto.getEmailClient())
-                .passwordClient(passwordEncoder.encode(clientDto.getPasswordClient()))
                 .nameClient(clientDto.getNameClient())
                 .phoneClient(clientDto.getPhoneClient())
                 .cityClient(clientDto.getCityClient())
@@ -96,10 +92,6 @@ public class ClientServiceImpl implements IClientService {
             client.setInstallationTypeClient(clientDto.getInstallationTypeClient());
             client.setSubsidyLevel(determineSubsidyLevel(clientDto));
 
-            if (clientDto.getPasswordClient() != null && !clientDto.getPasswordClient().isEmpty()) {
-                client.setPasswordClient(encodePassword(clientDto.getPasswordClient()));
-            }
-
             if (clientDto.getContractorId() != null) {
                 Contractor contractor = contractorDao.findById(clientDto.getContractorId())
                         .orElseThrow(() -> new RuntimeException("Contratista no encontrado"));
@@ -119,11 +111,6 @@ public class ClientServiceImpl implements IClientService {
         } else {
             throw new ClientNotFoundException("El cliente con ID " + clientDto.getIdClient() + " no existe");
         }
-    }
-
-    @Override
-    public String encodePassword(String password) {
-        return passwordEncoder.encode(password);
     }
 
     @Transactional
