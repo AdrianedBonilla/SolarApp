@@ -77,4 +77,17 @@ public class EmailUtil {
         helper.setText(html, true);
         mailSender.send(message);
     }
+
+    public void sendContractorNotificationEmail(String to, String subject, Map<String, Object> model) throws MessagingException, TemplateException, IOException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject(subject);
+
+        Template template = freemarkerConfig.getTemplate("contractor-notification-email-template.html");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+
+        helper.setText(html, true);
+        mailSender.send(message);
+    }
 }

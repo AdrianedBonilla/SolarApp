@@ -18,11 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements IClientService {
-   
+
     private final ClientDao clientDao;
     private final ContractorDao contractorDao;
     private final EmailUtil emailUtil;
@@ -58,6 +60,19 @@ public class ClientServiceImpl implements IClientService {
             Contractor contractor = contractorDao.findById(clientDto.getContractorId())
                     .orElseThrow(() -> new RuntimeException("Contratista no encontrado"));
             client.setContractor(contractor);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("clientName", client.getNameClient());
+            model.put("clientEmail", client.getEmailClient());
+            model.put("clientPhone", client.getPhoneClient());
+            model.put("clientLocation", client.getCityClient());
+
+            try {
+                emailUtil.sendContractorNotificationEmail(contractor.getEmailContractor(), "Nuevo Cliente Registrado", model);
+            } catch (MessagingException | TemplateException | IOException e) {
+                e.printStackTrace();
+                throw new EmailSendingException("Failed to send notification email to contractor", e);
+            }
         }
 
         return clientDao.save(client);
@@ -90,12 +105,19 @@ public class ClientServiceImpl implements IClientService {
             client.setNeighborhoodClient(clientDto.getNeighborhoodClient());
             client.setMonthlyConsumptionClient(clientDto.getMonthlyConsumptionClient());
             client.setInstallationTypeClient(clientDto.getInstallationTypeClient());
-            client.setSubsidyLevel(determineSubsidyLevel(clientDto));
 
             if (clientDto.getContractorId() != null) {
                 Contractor contractor = contractorDao.findById(clientDto.getContractorId())
                         .orElseThrow(() -> new RuntimeException("Contratista no encontrado"));
                 client.setContractor(contractor);
+
+                if (contractor.getIdContractor() == 1) {
+                    client.setSubsidyLevel(determineSubsidyLevel(clientDto));
+                } else {
+                    client.setSubsidyLevel("No aplicable");
+                }
+            } else {
+                client.setSubsidyLevel("No aplicable");
             }
 
             Client updatedClient = clientDao.save(client);
