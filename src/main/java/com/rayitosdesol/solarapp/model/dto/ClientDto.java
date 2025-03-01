@@ -14,10 +14,6 @@ public class ClientDto {
     @Email(message = "El correo electrónico debe ser válido")
     private String emailClient;
 
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
-    private String passwordClient;
-
     @NotBlank(message = "El nombre es obligatorio")
     private String nameClient;
 

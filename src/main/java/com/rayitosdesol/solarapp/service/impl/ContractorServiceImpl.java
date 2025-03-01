@@ -12,7 +12,6 @@ import com.rayitosdesol.solarapp.model.entity.Contractor;
 import com.rayitosdesol.solarapp.model.entity.Enterprise;
 import com.rayitosdesol.solarapp.service.IContractorService;
 import com.rayitosdesol.solarapp.model.dao.EnterpriseDao;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Service
@@ -20,12 +19,10 @@ public class ContractorServiceImpl implements IContractorService{
 
     private final ContractorDao contractorDao;
     private final EnterpriseDao enterpriseDao;
-    private final BCryptPasswordEncoder passwordEncoder;
 
-    public ContractorServiceImpl(ContractorDao contractorDao, EnterpriseDao enterpriseDao, BCryptPasswordEncoder passwordEncoder) {
+    public ContractorServiceImpl(ContractorDao contractorDao, EnterpriseDao enterpriseDao) {
         this.contractorDao = contractorDao;
         this.enterpriseDao = enterpriseDao;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional(readOnly = true)
@@ -52,7 +49,6 @@ public class ContractorServiceImpl implements IContractorService{
         .phoneContractor(contractorDto.getPhoneContractor())
         .locationContractor(contractorDto.getLocationContractor())
         .expertiseContractor(contractorDto.getExpertiseContractor())
-        .passwordContractor(passwordEncoder.encode(contractorDto.getPasswordContractor()))
         .enterprise(enterprise) 
         .build();
     
@@ -72,10 +68,6 @@ public class ContractorServiceImpl implements IContractorService{
         contractor.setPhoneContractor(contractorDto.getPhoneContractor());
         contractor.setLocationContractor(contractorDto.getLocationContractor());
         contractor.setExpertiseContractor(contractorDto.getExpertiseContractor());
-
-        if (contractorDto.getPasswordContractor() != null && !contractorDto.getPasswordContractor().isEmpty()) {
-            contractor.setPasswordContractor(encodePassword(contractorDto.getPasswordContractor()));
-        }
 
         if (contractorDto.getNitEnterprise() != null && !contractorDto.getNitEnterprise().isEmpty()) {
             Enterprise enterprise = findEnterpriseByNit(contractorDto.getNitEnterprise());
@@ -110,11 +102,6 @@ public class ContractorServiceImpl implements IContractorService{
     public Enterprise findEnterpriseByNit(String nitEnterprise) {
         return enterpriseDao.findByNitEnterprise(nitEnterprise)
             .orElseThrow(() -> new RuntimeException("Empresa no encontrada"));
-    }
-
-    @Override
-    public String encodePassword(String password) {
-        return passwordEncoder.encode(password);
     }
     
 }

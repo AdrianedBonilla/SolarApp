@@ -23,8 +23,6 @@ public interface IContractorService {
 
     Enterprise findEnterpriseByNit(String nitEnterprise);
 
-    String encodePassword(String password);
-
     Contractor findByEmail(String email);
 
     Contractor update(ContractorDto contractor);

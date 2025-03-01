@@ -14,6 +14,5 @@ public class ContractorDto {
     private String phoneContractor;
     private String locationContractor;
     private String expertiseContractor;
-    private String passwordContractor;
     private String nitEnterprise;
 }
