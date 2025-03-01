@@ -2,15 +2,23 @@ package com.rayitosdesol.solarapp.controller;
 
 import com.rayitosdesol.solarapp.model.dto.ClientDto;
 import com.rayitosdesol.solarapp.model.entity.Client;
+import com.rayitosdesol.solarapp.model.entity.Contractor;
 import com.rayitosdesol.solarapp.service.IClientService;
+import com.rayitosdesol.solarapp.service.IContractorService;
+import com.rayitosdesol.solarapp.util.EmailUtil;
 
+import freemarker.template.TemplateException;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -19,9 +27,13 @@ public class ClientController {
     private static final String CLIENT_NOT_FOUND = "Client not found";
 
     private final IClientService clientService;
+    private final IContractorService contractorService;
+    private final EmailUtil emailUtil;
 
-    public ClientController(IClientService clientService) {
+    public ClientController(IClientService clientService, IContractorService contractorService, EmailUtil emailUtil) {
         this.clientService = clientService;
+        this.contractorService = contractorService;
+        this.emailUtil = emailUtil;
     }
 
     @GetMapping("clients")
@@ -52,6 +64,25 @@ public class ClientController {
     @PostMapping("client")
     public ResponseEntity<Object> createClient(@Valid @RequestBody ClientDto clientDto) {
         Client clientSave = clientService.save(clientDto);
+
+        if (clientDto.getContractorId() != null) {
+            Contractor contractor = contractorService.findById(clientDto.getContractorId());
+            if (contractor != null) {
+                Map<String, Object> model = new HashMap<>();
+                model.put("contractorName", contractor.getNameContractor());
+                model.put("clientName", clientSave.getNameClient());
+                model.put("clientEmail", clientSave.getEmailClient());
+                model.put("clientPhone", clientSave.getPhoneClient());
+                model.put("clientLocation", clientSave.getCityClient());
+
+                try {
+                    emailUtil.sendContractorNotificationEmail(contractor.getEmailContractor(), "Nuevo Cliente Registrado", model);
+                } catch (MessagingException | TemplateException | IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(clientSave));
     }
 
@@ -69,6 +100,25 @@ public class ClientController {
 
         clientDto.setIdClient(id);
         Client updatedClient = clientService.update(clientDto);
+
+        if (clientDto.getContractorId() != null) {
+            Contractor contractor = contractorService.findById(clientDto.getContractorId());
+            if (contractor != null) {
+                Map<String, Object> model = new HashMap<>();
+                model.put("contractorName", contractor.getNameContractor());
+                model.put("clientName", updatedClient.getNameClient());
+                model.put("clientEmail", updatedClient.getEmailClient());
+                model.put("clientPhone", updatedClient.getPhoneClient());
+                model.put("clientLocation", updatedClient.getCityClient());
+
+                try {
+                    emailUtil.sendContractorNotificationEmail(contractor.getEmailContractor(), "Cliente Actualizado", model);
+                } catch (MessagingException | TemplateException | IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         return ResponseEntity.ok(convertToDto(updatedClient));
     }
 
