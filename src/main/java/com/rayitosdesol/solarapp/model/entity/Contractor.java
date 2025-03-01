@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @AllArgsConstructor
@@ -20,7 +21,7 @@ import lombok.ToString;
 @Data
 @Schema(hidden = true)
 @Table(name = "contractors")
-public class Contractor implements Serializable{
+public class Contractor implements Serializable {
 
     @Id
     @Column(name = "idContractor") 
@@ -54,6 +55,6 @@ public class Contractor implements Serializable{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nitEnterprise", nullable = false, referencedColumnName = "nitEnterprise")
+    @JsonBackReference
     private Enterprise enterprise;
-
 }

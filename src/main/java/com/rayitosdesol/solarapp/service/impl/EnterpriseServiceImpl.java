@@ -1,5 +1,6 @@
 package com.rayitosdesol.solarapp.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -32,6 +33,16 @@ public class EnterpriseServiceImpl implements IEnterpriseService {
     @Override
     public Optional<Enterprise> findByNit(String nitEnterprise) {
         return enterpriseDao.findByNitEnterprise(nitEnterprise);
-    
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Enterprise> findAll() {
+        return enterpriseDao.findAll();
+    }
+
+    @Override
+    public void delete(Enterprise enterprise) {
+        enterpriseDao.delete(enterprise);
     }
 }
