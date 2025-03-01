@@ -122,16 +122,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "password",
-									"value": "{{Password}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{User}}",
+									"key": "token",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -421,16 +416,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "password",
-									"value": "{{Password}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{User}}",
+									"key": "token",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -567,16 +557,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "password",
-									"value": "{{Password}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{User}}",
+									"key": "token",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -928,7 +913,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/encrypt",
+							"raw": "http://localhost:8080/api/encrypt",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -936,7 +921,6 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"v1",
 								"encrypt"
 							]
 						}
@@ -952,16 +936,11 @@
 					"name": "Consultar departamentos",
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "password",
-									"value": "{{Password}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{User}}",
+									"key": "token",
+									"value": "{{access_token}}",
 									"type": "string"
 								}
 							]
@@ -1028,6 +1007,57 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Autenticacion",
+			"item": [
+				{
+					"name": "Autorizacion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Guardar el token de acceso\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"access_token\", jsonData.access_token);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"client_id\": \"{{clientId}}\",\r\n  \"client_secret\": \"{{clienSecret}}\",\r\n  \"audience\": \"{{audience}}\",\r\n  \"grant_type\": \"client_credentials\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://dev-uzocrbam4tbw7ski.us.auth0.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"dev-uzocrbam4tbw7ski",
+								"us",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -1062,6 +1092,25 @@
 			"key": "User",
 			"value": "usuario",
 			"type": "string"
+		},
+		{
+			"key": "clienSecret",
+			"value": "sj_gdMdPg3aFWKSRbG0vBJZlVU_RJwIpUY1pDGBOXsUcZjJbiPrHNu_J_om3THI1",
+			"type": "string"
+		},
+		{
+			"key": "clientId",
+			"value": "B1G470PDvH0dl2LHjeYWN24chaNzmuuG",
+			"type": "string"
+		},
+		{
+			"key": "audience",
+			"value": "authentication ",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": ""
 		}
 	]
 }
