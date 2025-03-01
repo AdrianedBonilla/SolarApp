@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,6 +32,23 @@ public class EnterpriseController {
         Optional<Enterprise> enterprise = enterpriseService.findByNit(nitEnterprise);
         if (enterprise.isPresent()) {
             return ResponseEntity.ok(enterprise.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Enterprise not found");
+        }
+    }
+
+    @GetMapping("enterprises")
+    public ResponseEntity<List<Enterprise>> getAllEnterprises() {
+        List<Enterprise> enterprises = enterpriseService.findAll();
+        return ResponseEntity.ok(enterprises);
+    }
+
+    @DeleteMapping("enterprise/{nitEnterprise}")
+    public ResponseEntity<Object> deleteEnterprise(@PathVariable("nitEnterprise") String nitEnterprise) {
+        Optional<Enterprise> enterprise = enterpriseService.findByNit(nitEnterprise);
+        if (enterprise.isPresent()) {
+            enterpriseService.delete(enterprise.get());
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Enterprise not found");
         }

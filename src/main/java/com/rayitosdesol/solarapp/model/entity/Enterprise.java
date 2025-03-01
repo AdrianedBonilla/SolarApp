@@ -19,7 +19,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @AllArgsConstructor
@@ -29,7 +29,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Data
 @Schema(hidden = true)
 @Table(name = "enterprises")
-@JsonIgnoreProperties({"contractors"})
 public class Enterprise implements Serializable {
 
     @Id
@@ -45,5 +44,6 @@ public class Enterprise implements Serializable {
     private String nameEnterprise;
 
     @OneToMany(mappedBy = "enterprise", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Contractor> contractors;
 }
