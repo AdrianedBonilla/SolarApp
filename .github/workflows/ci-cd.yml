@@ -113,5 +113,5 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          docker tag solarapp-backend $DOCKER_USERNAME/solarapp-backend:latest
+          docker tag solarapp-backend:latest $DOCKER_USERNAME/solarapp-backend:latest
           docker push $DOCKER_USERNAME/solarapp-backend:latest
