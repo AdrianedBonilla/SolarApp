@@ -68,7 +68,7 @@ jobs:
 
       - name: Wait for MySQL to be ready
         run: |
-            while ! docker-compose exec db mysqladmin --user=root --password=root --host "127.0.0.1" ping --silent &> /dev/null ; do
+          while ! docker-compose exec db mysqladmin --user=root --password=root --host "db" ping --silent &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
           done
