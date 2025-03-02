@@ -68,6 +68,8 @@ jobs:
 
       - name: Wait for MySQL to be ready
         run: |
+          echo "Waiting for MySQL to be ready..."
+          sleep 30
           while ! docker-compose exec db mysql --user=root --password=root -e "SELECT 1" &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
