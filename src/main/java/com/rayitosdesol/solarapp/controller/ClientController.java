@@ -63,6 +63,12 @@ public class ClientController {
 
     @PostMapping("client")
     public ResponseEntity<Object> createClient(@Valid @RequestBody ClientDto clientDto) {
+
+        Client clientWithSameEmail = clientService.findByEmail(clientDto.getEmailClient());
+        if (clientWithSameEmail != null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email ya está en uso");
+        }
+
         Client clientSave = clientService.save(clientDto);
 
         if (clientDto.getContractorId() != null) {
@@ -76,7 +82,8 @@ public class ClientController {
                 model.put("clientLocation", clientSave.getCityClient());
 
                 try {
-                    emailUtil.sendContractorNotificationEmail(contractor.getEmailContractor(), "Nuevo Cliente Registrado", model);
+                    emailUtil.sendContractorNotificationEmail(contractor.getEmailContractor(),
+                            "Nuevo Cliente Registrado", model);
                 } catch (MessagingException | TemplateException | IOException e) {
                     e.printStackTrace();
                 }
@@ -112,7 +119,8 @@ public class ClientController {
                 model.put("clientLocation", updatedClient.getCityClient());
 
                 try {
-                    emailUtil.sendContractorNotificationEmail(contractor.getEmailContractor(), "Cliente Actualizado", model);
+                    emailUtil.sendContractorNotificationEmail(contractor.getEmailContractor(), "Cliente Actualizado",
+                            model);
                 } catch (MessagingException | TemplateException | IOException e) {
                     e.printStackTrace();
                 }
