@@ -61,7 +61,7 @@ jobs:
           docker rm $(docker ps -a -q) || true
 
       - name: Build Docker image
-        run: docker build -t solarapp-backend -f Dockerfile .
+        run: docker build -t solarapp-backend:latest -f Dockerfile .
 
       - name: Run Docker Compose
         run: docker-compose up -d
