@@ -36,11 +36,18 @@ jobs:
           java-version: "17"
           distribution: "temurin"
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Set up Maven
+        uses: actions/setup-java@v2
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn clean install
 
       - name: Run tests
-        run: ./gradlew test
+        run: mvn test
 
       - name: Build Docker image
         run: docker build -t solarapp-backend .
@@ -56,7 +63,7 @@ jobs:
           done
 
       - name: Run integration tests
-        run: ./gradlew integrationTest
+        run: mvn verify
 
       - name: Install Postman CLI
         run: |
