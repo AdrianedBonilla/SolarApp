@@ -76,6 +76,12 @@ jobs:
       - name: Check MySQL logs
         run: docker-compose logs db
 
+      - name: Check MySQL status
+        run: docker-compose exec db mysqladmin --user=root --password=root status
+
+      - name: Check MySQL process list
+        run: docker-compose exec db mysql --user=root --password=root -e "SHOW PROCESSLIST"
+
       - name: Run integration tests
         run: mvn verify
 
