@@ -50,7 +50,7 @@ jobs:
         run: mvn test
 
       - name: Build Docker image
-        run: docker build -t solarapp-backend -f /d:/Personal/Proyectos/SolarApp/Dockerfile .
+        run: docker build -t solarapp-backend -f Dockerfile .
 
       - name: Run Docker Compose
         run: docker-compose up -d
