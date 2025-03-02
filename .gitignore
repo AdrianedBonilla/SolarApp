@@ -35,22 +35,21 @@ build/
 # Spring Boot
 SolarApp/src/main/resources/application.properties
 
-
 # Docker
 # Ignorar archivos y directorios generados por Docker
 docker-compose.override.yml
 docker-compose.debug.yml
-docker-compose.*
-Dockerfile.*
-**/Dockerfile
-**/docker-compose.yml
-**/docker-compose.yaml
-**/docker-compose.override.yml
-**/docker-compose.debug.yml
-**/docker-compose.*
-**/Dockerfile.*
-**/docker-compose.yml
-**/docker-compose.yaml
+# docker-compose.* # Comentado para permitir subir archivos docker-compose.yml
+# Dockerfile.* # Comentado para permitir subir archivos Dockerfile
+# **/Dockerfile # Comentado para permitir subir archivos Dockerfile
+# **/docker-compose.yml # Comentado para permitir subir archivos docker-compose.yml
+# **/docker-compose.yaml # Comentado para permitir subir archivos docker-compose.yaml
+# **/docker-compose.override.yml # Comentado para permitir subir archivos docker-compose.override.yml
+# **/docker-compose.debug.yml # Comentado para permitir subir archivos docker-compose.debug.yml
+# **/docker-compose.* # Comentado para permitir subir archivos docker-compose.*
+# **/Dockerfile.* # Comentado para permitir subir archivos Dockerfile.*
+# **/docker-compose.yml # Comentado para permitir subir archivos docker-compose.yml
+# **/docker-compose.yaml # Comentado para permitir subir archivos docker-compose.yaml
 
 # Ignorar volúmenes de Docker
 volumes/
