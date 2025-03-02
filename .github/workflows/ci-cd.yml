@@ -19,7 +19,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: solar
         ports:
-          - 3308:3306
+          - 3307:3306
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-interval=10s
@@ -66,6 +66,15 @@ jobs:
       - name: Run Docker Compose
         run: docker-compose up -d
 
+      - name: Check MySQL logs before waiting
+        run: docker-compose logs db
+
+      - name: Check MySQL status before waiting
+        run: docker-compose exec db mysqladmin --user=root --password=root status || true
+
+      - name: Check MySQL process list before waiting
+        run: docker-compose exec db mysql --user=root --password=root -e "SHOW PROCESSLIST" || true
+
       - name: Wait for MySQL to be ready
         run: |
           echo "Waiting for MySQL to be ready..."
@@ -75,13 +84,13 @@ jobs:
             sleep 2
           done
 
-      - name: Check MySQL logs
+      - name: Check MySQL logs after waiting
         run: docker-compose logs db
 
-      - name: Check MySQL status
+      - name: Check MySQL status after waiting
         run: docker-compose exec db mysqladmin --user=root --password=root status
 
-      - name: Check MySQL process list
+      - name: Check MySQL process list after waiting
         run: docker-compose exec db mysql --user=root --password=root -e "SHOW PROCESSLIST"
 
       - name: Run integration tests
