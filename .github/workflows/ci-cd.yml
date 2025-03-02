@@ -57,7 +57,8 @@ jobs:
 
       - name: Stop and remove existing containers
         run: |
-          docker-compose down
+          docker stop $(docker ps -a -q) || true
+          docker rm $(docker ps -a -q) || true
 
       - name: Build Docker image
         run: docker build -t solarapp-backend -f Dockerfile .
