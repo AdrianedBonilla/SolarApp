@@ -6,10 +6,9 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: solar
     ports:
-      - "3308:3306" 
+      - "3309:3306"  # Cambiado de 3308 a 3309
     volumes:
       - db_data:/var/lib/mysql
-      - ./src/main/resources/MySQL/solar.sql:/docker-entrypoint-initdb.d/init.sql
 
   app:
     build:
@@ -17,23 +16,6 @@ services:
       dockerfile: Dockerfile
     container_name: solarapp-backend
     environment:
-      SPRING_APPLICATION_NAME: solarapp
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/solar
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
-      SPRING_JPA_SHOW_SQL: "true"
-      SPRING_SECURITY_USER_NAME: usuario
-      SPRING_SECURITY_USER_PASSWORD: $$2a$$10$$MslT9JvXNTc5b4my0c5ESe.i2xuSpTwJWg992ZMH2MyZJfWV/mtpq
-      SPRING_JPA_HIBERNATE_NAMING_PHYSICAL_STRATEGY: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      SPRING_MAIL_HOST: smtp.gmail.com
-      SPRING_MAIL_PORT: 587
-      SPRING_MAIL_USERNAME: fa.developer.test@gmail.com
-      SPRING_MAIL_PASSWORD: jvik tfsd gxsj grus
-      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: "true"
-      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: "true"
-      SPRING_FREEMARKER_TEMPLATE_LOADER_PATH: classpath:/templates/
-      SPRING_FREEMARKER_SUFFIX: .html
       SPRINGDOC_SWAGGER_UI_PATH: /swagger-ui.html
     ports:
       - "8080:8080"
