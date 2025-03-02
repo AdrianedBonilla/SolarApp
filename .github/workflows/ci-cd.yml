@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: solar
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: "17"
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Run tests
+        run: ./gradlew test
+
+      - name: Build Docker image
+        run: docker build -t solarapp-backend .
+
+      - name: Run Docker Compose
+        run: docker-compose up -d
+
+      - name: Wait for MySQL to be ready
+        run: |
+          while ! docker-compose exec db mysqladmin --user=root --password=root --host "127.0.0.1" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+          done
+
+      - name: Run integration tests
+        run: ./gradlew integrationTest
+
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+
+      - name: Run API tests
+        run: |
+          postman collection run "18326062-03a73ca0-0b41-4260-b2b3-b193599b3476" -e "18326062-8957cc6e-bd58-4580-9881-da0f5cb8bbc4"
+
+      - name: Push Docker image to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          docker tag solarapp-backend $DOCKER_USERNAME/solarapp-backend:latest
+          docker push $DOCKER_USERNAME/solarapp-backend:latest
