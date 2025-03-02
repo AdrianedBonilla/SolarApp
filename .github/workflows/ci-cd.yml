@@ -61,20 +61,37 @@ jobs:
           docker rm $(docker ps -a -q) || true
 
       - name: Build Docker image
-        run: docker build -t solarapp-backend -f Dockerfile .
+        run: docker build -t solarapp-backend:latest -f Dockerfile .
 
       - name: Run Docker Compose
         run: docker-compose up -d
 
+      - name: Check MySQL logs before waiting
+        run: docker-compose logs db
+
+      - name: Check MySQL status before waiting
+        run: docker-compose exec -T db mysqladmin --user=root --password=root status || true
+
+      - name: Check MySQL process list before waiting
+        run: docker-compose exec -T db mysql --user=root --password=root -e "SHOW PROCESSLIST" || true
+
       - name: Wait for MySQL to be ready
         run: |
-          while ! docker-compose exec db mysqladmin --user=root --password=root --host "db" ping --silent &> /dev/null ; do
+          echo "Waiting for MySQL to be ready..."
+          sleep 30
+          while ! docker-compose exec -T db mysql --user=root --password=root -e "SELECT 1" &> /dev/null ; do
             echo "Waiting for database connection..."
             sleep 2
           done
 
-      - name: Check MySQL logs
+      - name: Check MySQL logs after waiting
         run: docker-compose logs db
+
+      - name: Check MySQL status after waiting
+        run: docker-compose exec -T db mysqladmin --user=root --password=root status
+
+      - name: Check MySQL process list after waiting
+        run: docker-compose exec -T db mysql --user=root --password=root -e "SHOW PROCESSLIST"
 
       - name: Run integration tests
         run: mvn verify
@@ -96,5 +113,5 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          docker tag solarapp-backend $DOCKER_USERNAME/solarapp-backend:latest
+          docker tag solarapp-backend:latest $DOCKER_USERNAME/solarapp-backend:latest
           docker push $DOCKER_USERNAME/solarapp-backend:latest
