@@ -55,6 +55,10 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
           docker-compose --version
 
+      - name: Stop and remove existing containers
+        run: |
+          docker-compose down
+
       - name: Build Docker image
         run: docker build -t solarapp-backend -f Dockerfile .
 
